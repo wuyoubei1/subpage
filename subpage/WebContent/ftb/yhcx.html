@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
 <link rel="stylesheet" href="../css/wap/buttons.css" type="text/css" />
 <link rel="stylesheet" href="../css/wap/bootstrap.css" type="text/css" />
-<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
 <link rel="stylesheet" href="../css/wap/korea.css">
 <style type="text/css">
 	.search{
@@ -143,7 +142,9 @@
 	</p>
 	<p>Copyright&nbsp;&nbsp;&nbsp;2011-2014 B5M.COM 版权所有</p>
 </footer>
-<script src="js/jquery.jsonp.js"></script>
+<script type="text/javascript" src="../js/jquery-1.7.1.js"></script>
+<script src="../js/jquery.jsonp.js"></script>
+<script src="../config/config.js"></script>
 <script>
 	var defaultV="优惠查询 输入您要查找的优惠商品 如，牛仔裤";
 	if($('#keyword').val()==''){
@@ -187,6 +188,8 @@
             }
         });
 	}
+	alert(config_path_JsonP);
 </script>
+
 </body>
 </html>
