@@ -2,14 +2,14 @@
 
 /*顶部导航菜单start*/
 body{padding-top:50px;}
-.topBar{position:fixed;top:0;left:0;z-index:1000;width:100%;height: 50px;overflow:hidden;zoom:1;background: #ff841e;color: #fff;text-align: center;border-bottom: 1px solid #e7e7e7;}
+.topBar{position:fixed;top:0;left:0;z-index:1000;width:100%;height: 50px;overflow:hidden;zoom:1;background: #E83334;color: #fff;text-align: center;border-bottom: 1px solid #e7e7e7;}
 .topBar .l{float:left;width:50px;}
 .topBar h1{font-size: 20px;line-height: 45px;margin:  0 60px 0 60px;}
 .topBar .arrow{height: 50px;width: 50px;display: block;font-size: 20px;color: #fff;background: #f97500 url(icon.png) 0 -96px no-repeat;border-right: 1px solid #ff8f33;}
 .topBar .rightArr{position:absolute;right:2px;top:50%; width:0px;height:0px;border-bottom:5px solid transparent;border-top:5px solid transparent;border-left:5px solid #ffd792;font-size:0px;line-height:0px;vertical-align: middle;margin: -3px 0 0 3px;display: inline-block;}
-.topBar .l{color: #fff;background: #f97500;border-right: 1px solid #ff8f33;height: 50px;}
+.topBar .l{color: #fff;background: #E83334;border-right: 1px solid #ff8f33;height: 50px;}
 .topBar .logo{background:#fff url(icon.png) 1px -1px;display: inline-block;width: 34px;height: 34px;border-radius: 34px;margin: 6px 9px 0 6px;}
-.topBar .r{position:relative;color: #fff;background: #f97500;border-left: 1px solid #ff8f33;float:right;width:50px;margin-top:-45px;font-size: 14px;line-height: 50px;height: 50px;}
+.topBar .r{position:relative;color: #fff;background: #E83334;border-left: 1px solid #ff8f33;float:right;width:50px;margin-top:-45px;font-size: 14px;line-height: 50px;height: 50px;}
 .topBar .r a{font-weight: bold;color: #fff;display: inline-block;padding: 0 10px 0 10px;}
 .topBar .search{border: 0;line-height: 30px;border-radius: 20px;width: 100%;overflow: hidden;outline:none;background: #fff3e9;text-indent: 2em;color:#666;}
 .topBar .sIcon{background:#fff3e9 url(icon.png) -190px -6px no-repeat;}
