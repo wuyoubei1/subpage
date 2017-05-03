@@ -4,10 +4,9 @@
 <meta charset="utf-8">
 	<title>精准订阅</title>
 <link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
-<link rel="stylesheet" href="../css/wap/buttons.css" type="text/css" />
-<script type="text/javascript" src="../js/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
 <link rel="stylesheet" href="../css/wap/korea.css">
-<link rel="stylesheet" href="../css/wap/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
 	<style type="text/css">
 	.search{
 		border: 1;line-height: 30px;border-radius: 10px;width: 95%;overflow: hidden;outline:none;
@@ -54,14 +53,14 @@
 		      <option>品牌订阅</option>
 		    </select>
         </div><div class="form-group ">
-      		<input class="form-control "  type="text" name="keyword"  value="请输入商品URL或者客户端商品分享链接" id="keyword" />
+      		<input class="form-control " type="text" name="keyword"  value="请输入商品URL或者客户端商品分享链接" id="keyword" />
       	</div><div class="form-group ">
       		<input class="form-control "  style="margin-right: 25px;" type="text" name="keyword" value="商品预期提醒价格" id="keyword" />
       	</div><div class="form-group ">
-      		<input class="form-control "  style="margin-right: 25px;" type="text" name="keyword" value="输入订阅手机号" id="keyword" />
+      		<input class="form-control " style="margin-right: 25px;" type="text" name="mb" value="输入订阅手机号" id="mb" />
       	</div><div class="form-group row ">
       		<input class="form-control " style="width: 50%" type="text" name="keyword" value="输入验证码" id="keyword" />
-      		<input class="button button-glow button-rounded button-caution " style="width: 40%;margin-left: 2px;padding: 0 5px" type="submit" onclick="yhgm('https://s.click.taobao.com/sJUJztw')" value="获取验证码">
+      		<input class="button button-glow button-rounded button-caution " style="width: 40%;margin-left: 2px;padding: 0 5px" type="submit" id="hsbtn" value="获取验证码">
       	</div>
       </div>
         </li>
@@ -85,4 +84,81 @@
 	<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
 </footer>
 </body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+//验证码
+$(function () {
+     var util = {
+        wait: 90,
+        hsTime: function (that) {
+            _this = $(this);
+            if (_this.wait == 0) {
+                $('#hsbtn').removeAttr("disabled").html('重发验证码');
+                _this.wait = 90;
+            } else {
+                var _this = this;
+                //alert( $(that).val());
+                //$(that).val('在' + _this.wait + '秒后点此重发');
+                $(that).attr("disabled", true).val('' + _this.wait + '秒');
+                _this.wait--;
+                setTimeout(function () {
+                    _this.hsTime(that);
+                }, 1000);
+            }
+        }
+    };
+
+    $("#hsbtn").click(function(){
+        var mb=$('#mb').val();
+        if(mb==''||mb=='输入订阅手机号'){
+            alert('请输入手机号');
+            return false;
+        }
+        util.hsTime('#hsbtn');
+        //调用后台程序产生验证码
+        $.ajax({ url: "http://localhost:8181/jeesite/f/sys/vc/gc", data: "mb="+mb});
+    });
+    
+    $('#mb').click(function(){
+    	if(this.value=='输入订阅手机号'){
+    		this.value='';
+    	}
+    });
+    $('#mb').blur(function (){
+    	if(this.value==''){
+    		this.value='输入订阅手机号';
+    	}
+    });
+     
+     /***保存表单**/
+     $("#saveBtn").click(function(){
+    	 $.ajax({
+    		cache: true,
+            type: "POST",
+            url:"http://localhost:8181/jeesite/f/craw/catgoryMobile/save",
+            data:$('#form1').serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+                alert("Connection error");
+            },
+            success: function(data) {
+              	if(data=='0'){
+              		alert("操作成功");
+              	}else{
+              		alert("操作失败");
+              	}
+            }
+    	 });
+     });
+     
+     $('#type').change(function(){
+    	 alert(1);
+    	 var ss = $(this).children('option:selected').val();
+    	 if(ss=='2'||ss=='精准订阅'){
+    		 
+    	 }
+    	 
+     });
+})
+</script>
 </html>

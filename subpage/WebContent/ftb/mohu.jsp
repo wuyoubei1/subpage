@@ -7,8 +7,8 @@
 	<title>模糊订阅</title>
 
 <link rel="stylesheet" href="css/wap/index.css" type="text/css" />
-<link rel="stylesheet" href="css/wap/buttons.css" type="text/css" />
-<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="css/wap/korea.css">
 	
 	<style type="text/css">

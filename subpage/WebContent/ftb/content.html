@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>优惠查询-详情页面</title>
+<link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
+<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
+<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="../css/wap/korea.css">
+<style type="text/css">
+	.search{
+		border: 1;line-height: 30px;border-radius: 10px;width: 95%;overflow: hidden;outline:none;
+		background: #ffffe9;text-indent: 2em;color:#666;
+	}
+	.yhxx{
+		 border: 1px solid rgba(0,0,0,.15);
+		 margin-top: 5px;
+	}
+	</style>
+	<style type="text/css">
+	*{margin:0; padding:0;}
+	a{text-decoration: none;}
+	img{max-width: 100%; height: auto;}
+	.weixin-tip{display: none; position: fixed; left:0; top:0; bottom:0; background: rgba(0,0,0,0.8); filter:alpha(opacity=80);  height: 100%; width: 100%; z-index: 100;}
+	.weixin-tip p{text-align: center; margin-top: 10%; padding:0 5%;}
+	</style>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0, maximum-scale=1.0">
+<meta content="telephone=no" name="format-detection" />
+</head>
+<body>
+<div class="weixin-tip">
+		<p>
+			<img src="live_weixin.png" alt="微信打开"/>
+		</p>
+	</div>
+<div class="news" style="display: block;margin-top: 0em;">
+     <div class="news-fixed">
+         <a href="../index.html" class="fl"></a>
+         <h1>商品详情</h1>
+     </div>
+     <div  style="text-align: center;">
+		<img alt="" id="picUrl" src="" width="100%"/><br>
+		<span id="title" style="font-size: 16px;font-weight: bold;"></span><br>
+		一口价：<span id=reservePrice></span>&nbsp;
+		月销量：<span id="volume"></span><br>
+		<span style="font-size: 16px;font-weight: bold;color: red">折扣价：<span id="zkj"></span></span><br>
+		<input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="detail()" value="查看详情">
+		<a id="buylink" biz-itemid="" isconvert=1 href="#" to="" onclick="javascript:buylink()"><input class="button button-glow button-rounded button-caution button-small" type="submit"  value="点击购买"></a>
+     </div>
+	 <div id="detail" style="text-align: center;"></div> 
+</div>
+<br>
+<footer class="footer">
+	<div class="top">
+			<a href="https://login.taobao.com/" >登录</a>|
+			<a href="https://reg.taobao.com/member/reg/fill_mobile.htm" >注册</a>
+			<a class="btn" href="#">Top</a>
+	</div>
+	<p>
+		<a href="../index.html">标准版</a> <a class="ok" href="../index.html">触屏版</a>
+	</p>
+	<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
+</footer>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
+<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+<script>
+//接收传递的参数
+var href = window.location.href;
+var id=href.split('=')[1];
+//alert(id);
+
+$.jsonp({
+    url:config_path_JsonP+'/subadmin/f/sub/pTb/dt',
+    data:{'numIids':id,'fields':'num_iid,title,pict_url,reserve_price,zk_final_price,provcity,item_url,seller_id,volume,nick'},
+    callbackParameter:"callback",
+    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+    //jsonpCallback: "receive",//自定
+    timeout:3000,
+    dataFilter:function(json){
+        console.log("jsonp.filter:"+json.results.length);
+        for(var i=0;i<json.results.length;i++){
+        	//obj=json.get(i);
+        	console.log('图片URL:'+json.results[i].pictUrl);
+        	$('#picUrl').attr('src',json.results[i].pictUrl);
+        	$('#title').html(json.results[i].title);
+        	$('#zkj').html(json.results[i].zkFinalPrice);
+        	$('#volume').html(json.results[i].volume);
+        	$('#reservePrice').html(json.results[i].reservePrice);
+        	$('#buylink').attr('biz-itemid',json.results[i].numIid);
+        	$('#buylink').attr('to',json.results[i].itemUrl);
+        }
+    },
+    success:function(json,textStatus,xOptions){
+        console.log("jsonp.success:"+json);
+    },
+    error:function(xOptions,textStatus){
+        console.log("jsonp.error:"+textStatus+", rel="+xOptions);
+    }
+});
+
+var temp='';
+function detail(){
+	$.jsonp({
+	    url:config_path_JsonP+'/subadmin/f/sub/pTb/dt',
+	    data:{'numIids':id,'fields':'num_iid,small_images'},
+	    callbackParameter:"callback",
+	    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+	    //jsonpCallback: "receive",//自定
+	    timeout:3000,
+	    dataFilter:function(json){
+	        console.log("jsonp.filter:"+json.results.length);
+	        for(var i=0;i<json.results.length;i++){
+	        	//obj=json.get(i);
+	        	console.log('图片URL:'+json.results[i].pictUrl);	        	
+	        	for(var ii=0;ii<json.results[i].smallImages.length;ii++){
+	        		temp+='<img width="100%" src="'+json.results[i].smallImages[ii]+'"/>';
+	        	}
+	        	$('#detail').html(temp);
+	        }
+	    },
+	    success:function(json,textStatus,xOptions){
+	        console.log("jsonp.success:"+json);
+	    },
+	    error:function(xOptions,textStatus){
+	        console.log("jsonp.error:"+textStatus+", rel="+xOptions);
+	    }
+	});
+}
+
+</script>
+<script type="text/javascript">
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "http://a.alimama.cn/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = {
+            pid: "mm_10221473_23986300_80854564",/*推广单元ID，用于区分不同的推广渠道*/
+            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+            unid: "",/*自定义统计字段*/
+            type: "click" /* click 组件的入口标志 （使用click组件必设）*/
+        };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+</script>
+
+<!-- 微信打开 -->
+<script type="text/javascript">
+function buylink(){
+	var isWeixin = is_weixin();
+	if(isWeixin){
+		$(".weixin-tip").css("height",winHeight);
+        $(".weixin-tip").show();
+	}else{
+		document.location.href=$('#buylink').attr('to');
+	}
+}
+var winHeight = $(window).height();
+function is_weixin() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        return true;
+    } else {
+        return false;
+    }
+}
+	</script>
+
+</body>
+</html>

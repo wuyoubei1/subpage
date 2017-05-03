@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>商品详情</title>
+</head>
+<body style="overflow-y:hidden">
+<iframe id="tbcontent" src="" frameborder="no"  style="width: 100%;" onload="changeFrameHeight()"> 
+
+
+</iframe>
+<script type="text/javascript">
+var href = window.location.href;
+var tbhref=href.split('h=')[1];
+alert(tbhref);
+document.getElementById("tbcontent").src=tbhref;
+changeFrameHeight();
+function changeFrameHeight(){
+    var ifm= document.getElementById("tbcontent"); 
+    ifm.height=document.documentElement.clientHeight-20;
+}
+window.onresize=function(){  
+     changeFrameHeight();  
+} 
+</script>
+</body>
+</html>

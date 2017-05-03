@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,19 +22,19 @@
 			<a class="logo" href="index.html"></a>
 		</div>
 		<h1>
-			<input class="search sIcon" type="text" name="q" id="q" 
+			<input class="search sIcon" type="text" name="keyword" id="keyword"
 				value="输入关键词搜索" onclick="clearKey(this);"/>
 		</h1>
 		<div class="r">
-			<a onclick="sh(0)">搜索</a>
+			<a onclick="subSearchForm()">搜索</a>
 		</div>
 	</nav>
 </form>
 <section class="nav">
-	<a class="nav1" href="http://www.quangou365.com:82/quan.php"><img src="images/blank.gif" alt="" /><span>优惠查询</span>
+	<a class="nav1" href="ftb/yhcx.html"><img src="images/blank.gif" alt="" /><span>优惠查询</span>
 	</a><a class="nav2" href="ftb/jzdy.html"><img src="images/blank.gif" alt=""/><span>精准订阅</span> 
 	</a><a class="nav3"	href="ftb/spsx.html"><img src="images/blank.gif" alt=""/><span>商品筛选</span> 
-	</a><a class="nav4"	href="https://temai.taobao.com/event1291805.htm?q=BqlHS6FezdQN%2BoQUE6FNzKeg20vBLKywRCD5D%2BW%2FSCGZrGGDG9YDbNFbQ8Y6kKeGsK6N32jBhcA86ds3Wskk0w%3D%3D" target="_blank"><img src="images/blank.gif" alt=""/><span>淘宝特卖</span> </a>
+	</a><a class="nav4"	href="" ><img src="images/blank.gif" alt=""/><span>模糊查询</span> </a>
 </section>
 <script>
 	function clearKey(obj){
@@ -40,27 +42,26 @@
 			obj.value='';
 		}
 	}
-	function sh(k){
-		if(k==0){
-			k=encodeURIComponent($('#q').val());
-		}
-		document.location.href='ftb/spsx.html?q='+k;
+	function subSearchForm(){
+		//alert("搜索框");
+		window.location.href="ftb/yhcx.html";
 	}
 </script>
 		<ul class="menu">
-			<li><a href="javascript:sh('爬行垫')">爬行垫</a></li>
-			<li><a href="javascript:sh('小米手机')" >小米手机</a></li>
-			<li><a href="javascript:sh('笔记本')">笔记本</a></li>
-			<li><a href="javascript:sh('零食')">零食</a></li>
+			<li><a href="ftb/yhcx.html">爬行垫</a></li>
+			<li><a href="ftb/t_xiaomi6.html" >小米手机</a></li>
+			<li><a href="ftb/t_bjbdn.html">笔记本</a></li>
+			<li><a href="ftb/t_lingshi.html">零食</a></li>
 		</ul>
 	</header>
 	<div class="content">
-		<h3 class="tit" id="qgsp">
-			<img class="icBuy" src="http://oonojod06.bkt.clouddn.com/qg.png" alt=""	style="background: none;" />抢购
+		<h3 class="tit">
+			<img class="icBuy" src="images/korea/korea_logo.png" alt=""	style="background: none;" />韩国馆
 		</h3>
 		<div class="conBuy sec">
-			<a href="ftb/t_hanyu.html"> <img alt="" src="http://img3.tbcdn.cn/tfscom/i1/TB1Xe.UQpXXXXcTaXXXXXXXXXXX_!!0-item_pic.jpg"></a>
-			<a href="ftb/t_shishang.html"> <img alt="" src="http://img1.tbcdn.cn/tfscom/i3/TB17nCHQpXXXXcKXpXXXXXXXXXX_!!0-item_pic.jpg"></a>
+			<a href="ftb/t_hanyu.html"> <img alt="" src="http://wx4.sinaimg.cn/mw690/47a14fc7ly1fesd5kaxjgj209z04z4cm.jpg"></a>
+			<a href="ftb/t_shishang.html"> <img alt="" src="http://wx2.sinaimg.cn/mw690/47a14fc7ly1fesd5pcf7kj209z04yao8.jpg"></a>
+			<a href="ftb/t_hanju.html"> <img alt="" src="http://wx1.sinaimg.cn/mw690/47a14fc7ly1fesd5thqd4j20a009ydv1.jpg"></a>
 			<div class="cl"></div>
 		</div>
 		<h3 class="tit">
@@ -165,14 +166,6 @@
 	</p>
 	<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
 </footer>
-<script type="text/javascript">
-	$('#qgsp').click(function(){
-	    document.location.href="ftb/qg.html";
-	});
-
-
-</script>
-
 </body>
 
 </html>
