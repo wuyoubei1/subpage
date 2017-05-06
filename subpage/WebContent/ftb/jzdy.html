@@ -2,163 +2,313 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-	<title>精准订阅</title>
+<title>精准订阅</title>
 <link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
-<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
+<link rel="stylesheet"
+	href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
 <link rel="stylesheet" href="../css/wap/korea.css">
-<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
-	<style type="text/css">
-	.search{
-		border: 1;line-height: 30px;border-radius: 10px;width: 95%;overflow: hidden;outline:none;
-		background: #ffffe9;text-indent: 2em;color:#666;
-	}
-	.yhxx{
-		 border: 1px solid rgba(0,0,0,.15);
-		 margin-top: 5px;
-	}
-	.form-group {
-	    margin-bottom: 1rem;
-	    padding-right: 20px;
-	}
-	.row {
-	    display: -webkit-box;
-	    display: -webkit-flex;
-	    display: -ms-flexbox;
-	    display: flex;
-	    -webkit-flex-wrap: wrap;
-	    -ms-flex-wrap: wrap;
-	    flex-wrap: wrap;
-	}
-	</style>
+<link rel="stylesheet"
+	href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
+<style type="text/css">
+.search {
+	border: 1;
+	line-height: 30px;
+	border-radius: 10px;
+	width: 95%;
+	overflow: hidden;
+	outline: none;
+	background: #ffffe9;
+	text-indent: 2em;
+	color: #666;
+}
+
+.yhxx {
+	border: 1px solid rgba(0, 0, 0, .15);
+	margin-top: 5px;
+}
+
+.form-group {
+	margin-bottom: 1rem;
+	padding-right: 20px;
+}
+
+.row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+</style>
+
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0, maximum-scale=1.0">
 <meta content="telephone=no" name="format-detection" />
 </head>
 <body>
-    <div class="news" style="display: block;margin-top: 0em;">
-        <div class="news-fixed">
-            <a href="javascript:history.go(-1);" class="fl"></a>
-            <h1>精准订阅</h1>
-        </div>
-        <ul class="news-list">
-        <li>
-        				
-        <div class="news-detail " style="height: 300px;">
-        <div style="margin-bottom: 1rem;">
-	        <select class="form-control" style="width: 100%;" id="exampleSelect1">
-		      <option>订阅类型</option>
-		      <option>精准订阅</option>
-		      <option>大类订阅</option>
-		      <option>小类订阅</option>
-		      <option>品牌订阅</option>
-		    </select>
-        </div><div class="form-group ">
-      		<input class="form-control " type="text" name="keyword"  value="请输入商品URL或者客户端商品分享链接" id="keyword" />
-      	</div><div class="form-group ">
-      		<input class="form-control "  style="margin-right: 25px;" type="text" name="keyword" value="商品预期提醒价格" id="keyword" />
-      	</div><div class="form-group ">
-      		<input class="form-control " style="margin-right: 25px;" type="text" name="mb" value="输入订阅手机号" id="mb" />
-      	</div><div class="form-group row ">
-      		<input class="form-control " style="width: 50%" type="text" name="keyword" value="输入验证码" id="keyword" />
-      		<input class="button button-glow button-rounded button-caution " style="width: 40%;margin-left: 2px;padding: 0 5px" type="submit" id="hsbtn" value="获取验证码">
-      	</div>
-      </div>
-        </li>
-        </ul>
-<div class="news-page">
-    <div>
-   		<input class="button button-glow button-rounded button-caution " style="width: 40%;margin-left: 2px;" type="submit"  value="订阅">
-   	</div>	
-</div>
-</div>
-    <br>
-<footer class="footer">
-	<div class="top">
-		<a href="https://login.taobao.com/" >登录</a>|
-		<a href="https://reg.taobao.com/member/reg/fill_mobile.htm" >注册</a>
-		<a class="btn" href="#">Top</a>
+	<div class="news" style="display: block; margin-top: 0em;">
+		<div class="news-fixed">
+			<a href="javascript:history.go(-1);" class="fl"></a>
+			<h1>精准订阅</h1>
+		</div>
+		<form id="jzdy">
+			<ul class="news-list">
+				<li>
+
+					<div class="news-detail " style="height: 300px;">
+						<div style="margin-bottom: 1rem;">
+							<select class="form-control" style="width: 100%;" id="type"
+								name="type">
+								<option>订阅类型</option>
+								<option value="1">精准订阅</option>
+								<option value="2">大类订阅</option>
+								<option value="3">小类订阅</option>
+								<option value="4">品牌订阅</option>
+							</select>
+						</div>
+						<div class="form-group ">
+							<input class="form-control " type="text" name="url"
+								placeholder="请输入商品URL或者客户端商品分享链接" id="url" /> 
+							<input type="hidden" name="goodsId" value="" id="goodsId" />
+							<input type="hidden" name="content" value="" id="content" />
+						</div>
+						
+						
+						<div id="dingyue1" >
+							<div class="form-group ">
+								<input class="form-control " style="margin-right: 25px;"
+									type="text" name="price" placeholder="商品预期提醒价格" id="price" />
+							</div>
+							<div class="form-group ">
+								<input class="form-control " style="margin-right: 25px;"
+									type="text" name="mobile" placeholder="输入订阅手机号" id="mobile" />
+							</div>
+							<div class="form-group row ">
+								<input class="form-control " style="width: 50%" type="text"
+									name="msg" placeholder="输入验证码" id="msg" /> <input
+									class="button button-glow button-rounded button-caution "
+									style="width: 40%; margin-left: 2px; padding: 0 5px"
+									type="button" id="hsbtn" value="获取验证码">
+							</div>
+						</div>
+						<div id="goumai1" style="display: none;">
+							<input class="form-control " style="margin-right: 25px;"
+									type="text" name="price" placeholder="优惠后价格" id="price" />
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="news-page">
+			
+				<div id="dingyue2">
+					<input class="button button-glow button-rounded button-caution "
+						style="width: 40%; margin-left: 2px;" type="button" value="订阅"
+						id="saveBtn">
+				</div>
+				<div id="goumai2"  style="display: none;">
+					<input class="button button-glow button-rounded button-caution "
+						style="width: 40%; margin-left: 2px;" type="button" value="优惠购买"
+						id="buy">
+					<input class="button button-glow button-rounded button-caution "
+						style="width: 40%; margin-left: 2px;" type="button" value="优惠幅度太低"
+						id="isno">	
+				</div>
+			</div>
+		</form>
 	</div>
-	<p>
-		<a href="../index.html">标准版</a> <a class="ok" href="../index.html">触屏版</a>
-	</p>
-	<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
-</footer>
+	<br>
+	<footer class="footer">
+		<div class="top">
+			<a href="https://login.taobao.com/">登录</a>| <a
+				href="https://reg.taobao.com/member/reg/fill_mobile.htm">注册</a> <a
+				class="btn" href="#">Top</a>
+		</div>
+		<p>
+			<a href="../index.html">标准版</a> <a class="ok" href="../index.html">触屏版</a>
+		</p>
+		<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
+	</footer>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-//验证码
-$(function () {
-     var util = {
-        wait: 90,
-        hsTime: function (that) {
-            _this = $(this);
-            if (_this.wait == 0) {
-                $('#hsbtn').removeAttr("disabled").html('重发验证码');
-                _this.wait = 90;
-            } else {
-                var _this = this;
-                //alert( $(that).val());
-                //$(that).val('在' + _this.wait + '秒后点此重发');
-                $(that).attr("disabled", true).val('' + _this.wait + '秒');
-                _this.wait--;
-                setTimeout(function () {
-                    _this.hsTime(that);
-                }, 1000);
-            }
-        }
-    };
+	var wait = 90;
+	//验证码
+	$(function() {
+		var util = {
+			hsTime : function(that) {
+				_this = $(this);
+				if (wait == 0) {
+					$('#hsbtn').removeAttr("disabled").html('重发验证码');
+					wait = 90;
+					$(that).val('重发验证码');
+				} else {
+					var _this = this;
+					$(that).attr("disabled", true).val('' + wait + '秒');
+					wait--;
+					setTimeout(function() {
+						_this.hsTime(that);
+					}, 1000);
+				}
+			}
+		};
+		$("#hsbtn").click(function() {
+			var mb = $('#mobile').val();
+			if (mb == '' || mb == '输入订阅手机号') {
+				alert('请输入手机号');
+				return false;
+			}
+			util.hsTime('#hsbtn');
+			//调用后台程序产生验证码
+			fsyzm(mb);
+		});
 
-    $("#hsbtn").click(function(){
-        var mb=$('#mb').val();
-        if(mb==''||mb=='输入订阅手机号'){
-            alert('请输入手机号');
-            return false;
-        }
-        util.hsTime('#hsbtn');
-        //调用后台程序产生验证码
-        $.ajax({ url: "http://localhost:8181/jeesite/f/sys/vc/gc", data: "mb="+mb});
-    });
-    
-    $('#mb').click(function(){
-    	if(this.value=='输入订阅手机号'){
-    		this.value='';
-    	}
-    });
-    $('#mb').blur(function (){
-    	if(this.value==''){
-    		this.value='输入订阅手机号';
-    	}
-    });
-     
-     /***保存表单**/
-     $("#saveBtn").click(function(){
-    	 $.ajax({
-    		cache: true,
-            type: "POST",
-            url:"http://localhost:8181/jeesite/f/craw/catgoryMobile/save",
-            data:$('#form1').serialize(),// 你的formid
-            async: false,
-            error: function(request) {
-                alert("Connection error");
-            },
-            success: function(data) {
-              	if(data=='0'){
-              		alert("操作成功");
-              	}else{
-              		alert("操作失败");
-              	}
-            }
-    	 });
-     });
-     
-     $('#type').change(function(){
-    	 alert(1);
-    	 var ss = $(this).children('option:selected').val();
-    	 if(ss=='2'||ss=='精准订阅'){
-    		 
-    	 }
-    	 
-     });
+		$('#mobile').click(function() {
+			if (this.value == '输入订阅手机号') {
+				this.value = '';
+			}
+		});
+		$('#mobile').blur(function() {
+			if (this.value == '') {
+				this.value = '输入订阅手机号';
+			}
+		});
+
+		/***保存表单**/
+		$("#saveBtn").click(function() {
+			var flag=checkForm();
+			if(flag){
+				$.ajax({
+					cache : true,
+					type : "POST",
+					dataType : "text",
+					url : "http://localhost:8080/subadmin/f/sub/jzdy/save",
+					data : $('#jzdy').serialize(),// 你的formid
+					async : false,
+					error : function(request) {
+						alert("Connection error");
+					},
+					success : function(data) {
+						if (data == '0') {
+							alert("操作成功");
+						} else {
+							alert("操作失败");
+						}
+					}
+				});
+			}else{
+				alert("请填写完整数据");
+			}
+		});
+
+		$('#type').change(function() {
+			var ss = $(this).children('option:selected').val();
+			if (ss == '2' || ss == '精准订阅') {
+
+			}
+
+		});
+		/**
+			截取商品id或关键字
+		 */
+		$("#url").blur(function() {
+			var url = $("#url").val();
+			if(url.length!=0){
+				var match=/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
+				if(match.test(url)){
+					var url2 = url.substring(url.indexOf("id"), url.length);
+					var id = url2.substring(3, url2.indexOf("&"));
+					$("#goodsId").val(id);
+					//验证是否存在此商品的优惠券
+					goods(id);
+				}else{
+					alert("不是正确的链接，请核实！");
+				}
+			}
+		});
+		/*
+		 *验证码验证
+		 */
+		$("#msg").blur(function() {
+			var msg = $("#msg").val();
+			var mobile = $("#mobile").val();
+			if (msg.length != 0) {
+			$.ajax({
+				type : "post",
+				datatype : "text",
+				url : "http://localhost:8080/subadmin/f/sub/shortmsg/check?msg="+ msg + "&mobile=" + mobile,
+				success : function(data) {
+				alert(data);
+					if (data == '0') {
+						alert("验证码已过期，请重新获取！！");
+							$('#hsbtn').removeAttr("disabled").html('重发验证码');
+					}
+					if (data == '1') {
+						alert("验证通过！");
+					}
+					if (data == '2') {
+						alert("验证码错误，请输入正确的验证码！");
+					}
+				}
+			});
+		}
+	});
+		function checkForm(){
+			var flag=false;
+			var msg = $("#msg").val();
+			var mobile = $("#mobile").val();
+			var url = $("#url").val();
+			var price=$("#price").val();
+			if(msg.length!=0||mobile.length!=0||url.length!=0||price.length!=0){
+				flag=true;
+			}
+			return flag;
+		}
+		
 })
+	/**
+	 * 发送验证码
+	 */
+	function fsyzm(mb) {
+		alert(mb);
+		//var url=config_path_JsonP+'/subadmin/f/sub/shortmsg/gv';
+		var url = 'http://localhost:8080/subadmin/f/sub/shortmsg/gv';
+		$.ajax({
+			type : "post",
+			url : url + "?mobile=" + mb,
+			dataType : "json",
+			success : function(data) {
+				alert(data.message);
+			}
+		});
+	}
+	/*
+	 *验证是否存在此商品
+   	 */
+	function goods(id){
+		$.ajax({
+			type:"post",
+			dataType:"text",
+			url:'http://localhost:8080/subadmin/f/sub/jzdy/goods?goodsId='+id,
+			success:function(data){
+				if(data!=null&&data!=""){
+					alert(1);
+					var list=eval('(' + data + ')');
+						//有次商品，展开购买div，隐藏订阅div
+					$("#dingyue1").css('display','none');
+					$("#dingyue2").css('display','none');
+					$("#goumai1").css('display','block'); 
+					$("#goumai2").css('display','block'); 
+				}else{
+					alert(2);
+					$("#dingyue1").css('display','block');
+					$("#dingyue2").css('display','block');
+					$("#goumai1").css('display','none'); 
+					$("#goumai2").css('display','none'); 
+				}
+			}
+		});
+	}
 </script>
 </html>
