@@ -79,7 +79,11 @@
 						<div id="dingyue1" >
 							<div class="form-group ">
 								<input class="form-control " style="margin-right: 25px;"
-									type="text" name="price" placeholder="商品预期提醒价格" id="price" />
+									type="text" name="price" placeholder="商品最低提醒价格" id="price" />
+							</div>
+							<div class="form-group ">
+								<input class="form-control " style="margin-right: 25px;"
+									type="text" name="priceMax" placeholder="商品最高提醒价格" id="priceMax" />
 							</div>
 							<div class="form-group ">
 								<input class="form-control " style="margin-right: 25px;"
@@ -94,8 +98,6 @@
 							</div>
 						</div>
 						<div id="goumai1" style="display: none;">
-							<input class="form-control " style="margin-right: 25px;"
-									type="text" name="price" placeholder="优惠后价格" id="price" />
 						</div>
 					</div>
 				</li>
@@ -107,7 +109,7 @@
 						style="width: 40%; margin-left: 2px;" type="button" value="订阅"
 						id="saveBtn">
 				</div>
-				<div id="goumai2"  style="display: none;">
+				<div id="goumai2" style="display: none;">
 					<input class="button button-glow button-rounded button-caution "
 						style="width: 40%; margin-left: 2px;" type="button" value="优惠购买"
 						id="buy">
@@ -198,7 +200,7 @@
 					}
 				});
 			}else{
-				alert("请填写完整数据");
+				alert("请填写正确完整的数据");
 			}
 		});
 
@@ -218,7 +220,12 @@
 				var match=/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
 				if(match.test(url)){
 					var url2 = url.substring(url.indexOf("id"), url.length);
-					var id = url2.substring(3, url2.indexOf("&"));
+					var id;
+					if(url2.length>15){
+						 id= url2.substring(3, url2.indexOf("&"));
+					}else{
+						id = url2.substring(3, url2.length);
+					}
 					$("#goodsId").val(id);
 					//验证是否存在此商品的优惠券
 					goods(id);
@@ -260,8 +267,13 @@
 			var mobile = $("#mobile").val();
 			var url = $("#url").val();
 			var price=$("#price").val();
-			if(msg.length!=0||mobile.length!=0||url.length!=0||price.length!=0){
+			var priceMax=$("#priceMax").val();
+			if(msg.length!=0&&mobile.length!=0&&url.length!=0&&price.length!=0&&priceMax.length!=0){
 				flag=true;
+			}
+			if(price>priceMax){
+				flag=false;
+				alert("最高价格不应小于最低价格")
 			}
 			return flag;
 		}
@@ -271,8 +283,6 @@
 	 * 发送验证码
 	 */
 	function fsyzm(mb) {
-		alert(mb);
-		//var url=config_path_JsonP+'/subadmin/f/sub/shortmsg/gv';
 		var url = 'http://localhost:8080/subadmin/f/sub/shortmsg/gv';
 		$.ajax({
 			type : "post",
@@ -293,22 +303,39 @@
 			url:'http://localhost:8080/subadmin/f/sub/jzdy/goods?goodsId='+id,
 			success:function(data){
 				if(data!=null&&data!=""){
-					alert(1);
 					var list=eval('(' + data + ')');
 						//有次商品，展开购买div，隐藏订阅div
-					$("#dingyue1").css('display','none');
-					$("#dingyue2").css('display','none');
-					$("#goumai1").css('display','block'); 
-					$("#goumai2").css('display','block'); 
+					document.getElementById("dingyue1").style.display="none";
+					document.getElementById("dingyue2").style.display="none";
+					document.getElementById("goumai1").style.display="block";
+					document.getElementById("goumai2").style.display="block";
+					appendUl(list[0]);
 				}else{
-					alert(2);
-					$("#dingyue1").css('display','block');
-					$("#dingyue2").css('display','block');
-					$("#goumai1").css('display','none'); 
-					$("#goumai2").css('display','none'); 
+					alert("此商品暂无优惠券");
+					//$("#dingyue1").style('display','block');
+					document.getElementById("dingyue1").style.display="block";
+					document.getElementById("dingyue2").style.display="block";
+					document.getElementById("goumai1").style.display="none";
+					document.getElementById("goumai2").style.display="none";
 				}
 			}
 		});
+	}
+	
+	function appendUl(obj){
+		var ul = $("#goumai1"); //主体元素
+		var ss='<li>'
+				+ '<div class="news-detail cfx">'
+				+ '	<a href="content.html?id='+obj.goodsId+'" target="_blank">'
+				+ '	<span class="news-detail-img"><img src="'+obj.pic+'" width="150" height="150"/></span>'
+				+ '	<h3 style="height:150px;">'+obj.price+'元<br>'
+				+'  原&nbsp;价：'+obj.orgPrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.price+'元</b></font><br>'
+				+'  30天销量：'+obj.salesNum+'件 <br><font style="color:black;font-size:16px;"><b>'+obj.title+'元</b></font><br>'
+				+'  </h3>'
+				+ ' </a>'
+				+ '</div>'
+				+ '</li>';
+				ul.html(ss);
 	}
 </script>
 </html>
