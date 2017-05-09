@@ -50,7 +50,7 @@
 <body>
 	<div class="news" style="display: block; margin-top: 0em;">
 		<div class="news-fixed">
-			<a href="javascript:history.go(-1);" class="fl"></a>
+			<a href="../index.html" class="fl"></a>
 			<h1>精准订阅</h1>
 		</div>
 		<form id="jzdy">
@@ -61,7 +61,7 @@
 						<div style="margin-bottom: 1rem;">
 							<select class="form-control" style="width: 100%;" id="type"
 								name="type">
-								<option>订阅类型</option>
+								<!--option>订阅类型</option-->
 								<option value="1">精准订阅</option>
 								<option value="2">大类订阅</option>
 								<option value="3">小类订阅</option>
@@ -133,6 +133,7 @@
 		<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
 	</footer>
 </body>
+<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	var wait = 90;
@@ -185,15 +186,15 @@
 					cache : true,
 					type : "POST",
 					dataType : "text",
-					url : "http://localhost:8080/subadmin/f/sub/jzdy/save",
+					url : config_path_JsonP+"/subadmin/f/sub/jzdy/save",
 					data : $('#jzdy').serialize(),// 你的formid
 					async : false,
 					error : function(request) {
-						alert("Connection error");
+						//alert("Connection error");
 					},
 					success : function(data) {
 						if (data == '0') {
-							alert("操作成功");
+							alert("订阅成功");
 						} else {
 							alert("操作失败");
 						}
@@ -244,15 +245,15 @@
 			$.ajax({
 				type : "post",
 				datatype : "text",
-				url : "http://localhost:8080/subadmin/f/sub/shortmsg/check?msg="+ msg + "&mobile=" + mobile,
+				url : config_path_JsonP+"/subadmin/f/sub/shortmsg/check?msg="+ msg + "&mobile=" + mobile,
 				success : function(data) {
-				alert(data);
+				//alert(data);
 					if (data == '0') {
 						alert("验证码已过期，请重新获取！！");
 							$('#hsbtn').removeAttr("disabled").html('重发验证码');
 					}
 					if (data == '1') {
-						alert("验证通过！");
+						//alert("验证通过！");
 					}
 					if (data == '2') {
 						alert("验证码错误，请输入正确的验证码！");
@@ -283,7 +284,7 @@
 	 * 发送验证码
 	 */
 	function fsyzm(mb) {
-		var url = 'http://localhost:8080/subadmin/f/sub/shortmsg/gv';
+		var url = config_path_JsonP+'/subadmin/f/sub/shortmsg/gv';
 		$.ajax({
 			type : "post",
 			url : url + "?mobile=" + mb,
@@ -300,7 +301,7 @@
 		$.ajax({
 			type:"post",
 			dataType:"text",
-			url:'http://localhost:8080/subadmin/f/sub/jzdy/goods?goodsId='+id,
+			url:config_path_JsonP+'/subadmin/f/sub/jzdy/goods?goodsId='+id,
 			success:function(data){
 				if(data!=null&&data!=""){
 					var list=eval('(' + data + ')');
