@@ -3,253 +3,458 @@
 <head>
 <meta charset="utf-8">
 <title>优惠查询</title>
-<link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
-<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
-<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
-<link rel="stylesheet" href="../css/wap/korea.css">
+<link rel="stylesheet" href="../css/dtk/wap_common.css" type="text/css" />
+<link rel="stylesheet" href="../css/dtk/wapindex.css" type="text/css" />
+<link rel="stylesheet" href="../css/dtk/swiper.min.css" type="text/css" />
+<link rel="stylesheet" href="../css/dtk/wapindex.css" type="text/css" />
 <style type="text/css">
-	.search{
-		border: 1;line-height: 30px;border-radius: 10px;width: 95%;overflow: hidden;outline:none;
-		background: #ffffe9;text-indent: 2em;color:#666;
-	}
-	.yhxx{
-		 border: 1px solid rgba(0,0,0,.15);
-		 margin-top: 5px;
-	}
-	</style>
+.order-nav {
+	height: 50px;
+	margin-top: 44px;
+	background: white;
+	margin-bottom: 10px;
+}
+
+.order-nav ul li {
+	box-sizing: border-box;
+	float: left;
+	width: 25%;
+	text-align: center;
+	line-height: 50px;
+	height: 50px;
+}
+
+.order-nav ul li a {
+	color: #333;
+	font-size: 15px;
+}
+
+.order-nav ul li.cur {
+	border-bottom: 1px solid #fe4a65;
+}
+
+.order-nav ul li.cur a {
+	color: #fe4a65;
+}
+
+.goto-div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: none;
+	border-bottom: 1px solid #EEE;
+	border-radius: 1px 1px 0 0;
+	background-color: #F8F8F8;
+	overflow: hidden;
+}
+
+.goto-btn {
+	display: block;
+	width: 64px;
+	height: 15px;
+	line-height: 15px;
+	margin: 6px auto;
+	text-align: center;
+	background-color: #FF6C00;
+	font-size: 12px;
+	color: #FFF;
+}
+
+.layui-layer-iframe {
+	margin-top: -12px !important;
+}
+
+.layui-layer-iframe .layui-layer-content {
+	padding-top: 17px !important;
+	overflow: visible !important;
+	background-color: #F8F8F8 !important;
+}
+
+.layui-layer-iframe .mask-tips {
+	position: relative;
+	width: 80% !important;
+	height: auto;
+	background-color: rgba(255, 102, 0, 0.7) !important;
+	background-size: 100%;
+	border-radius: 10px !important;
+}
+
+.layui-layer-iframe .mask-tips img.wechat-bg {
+	width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+.layui-layer-iframe .mask-tips img.wechat-arrow {
+	position: absolute;
+	top: -63px;
+	right: -10%;
+}
+
+.layui-layer-iframe .mask-tips .layui-layer-content {
+	overflow: visible !important;
+}
+
+.main-title .main-back {
+	position: initial;
+}
+
+.search-none {
+	width: 100%;
+	height: 200px;
+	margin: 5rem auto;
+	display: block;
+}
+
+.search-none .search-none-icon {
+	width: 150px;
+	height: 150px;
+	background: url(../images/search-none2s.png) center no-repeat;
+	background-size: 100%;
+	margin: 0 auto 25px;
+}
+
+.search-none p {
+	text-align: center;
+	font-size: 15px;
+	color: #aaa;
+	line-height: 24px;
+}
+
+.search-cat {
+	position: fixed;
+	top: 46px;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	padding-bottom: 11px;
+}
+
+.search-cat .search-cat-tit {
+	position: relative;
+	border-bottom: #898989 1px solid;
+	width: 150px;
+	height: 10px;
+	margin: 10px auto;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.search-cat .search-cat-tit .up-menu {
+	display: block;
+	width: 70px;
+	margin: 0 auto;
+	height: 20px;
+	background-color: #faf5f6;
+	line-height: 20px;
+	font-size: 13px;
+	color: #333;
+}
+
+.search-cat .menu-content {
+	width: 100%;
+	z-index: 2;
+	background: white;
+}
+
+.search-cat .menu-content .main-cat {
+	overflow: hidden;
+}
+
+.search-cat .menu-content .main-cat li {
+	box-sizing: border-box;
+	float: left;
+	width: 25%;
+	height: 51px;
+	border-bottom: #eee 1px solid;
+	border-right: #eee 1px solid;
+	text-align: center;
+	line-height: 51px;
+}
+
+.search-cat .menu-content .main-cat li a {
+	display: block;
+	color: #333;
+	font-size: 14px;
+}
+
+.search-cat .menu-content .main-cat li:nth-child(4n) {
+	border-right: none;
+}
+
+.search-cat .menu-content .up-menu {
+	display: block;
+	width: 60px;
+	height: 13px;
+	border-radius: 1px;
+	border: #ff7f90 1px solid;
+	text-align: center;
+	color: #ff7f90;
+	line-height: 12px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.nominate {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	padding-top: 10px;
+	clear: both;
+}
+
+.nominate p {
+	color: #aaa;
+	font: 13px "Simsun";
+}
+
+.nominate h2 {
+	color: #fe4a65;
+	font: 15px "Simsun";
+	padding: 0;
+	margin: 4px 0 16px;
+}
+</style>
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0, maximum-scale=1.0">
 <meta content="telephone=no" name="format-detection" />
 </head>
 <body>
-<div class="news" style="display: block;margin-top: 0em;">
-     <div class="news-fixed">
-         <a href="../index.html" class="fl"></a>
-         <h1>优惠查询</h1>
-     </div>
-     <ul class="news-list">
-     <li>
-     <div class="news-detail " style="height: 80px;">
-    		<input class="form-control" type="text" name="key" id="key" value="" 
-    			onchange="changehKey(this);" onclick="reset(this);" onkeydown="ctype();"/>
-    		<div class="form-control" style="margin-top: 5px;">
-     		<input class="form-check-input" type="radio" name="stype" id="type1" value="1" onclick="stype(1);"> 优惠幅度最大
-     		<input class="form-check-input" type="radio" name="stype" id="type2" value="2" onclick="stype(2);"> 单价最低
-     		<input class="form-check-input" type="radio" name="stype" id="type3" value="3" onclick="stype(3);"> 销量最高
-     		<input class="form-check-input" type="radio" name="stype" id="type4" value="4" onclick="stype(4);"> 评价最好
-    		</div>
-     </div>
-     </li>
-     
-     </ul>
-     
-<ul class="news-list form-control" id="content">
-	<li>
-		<div class="news-detail cfx">
-			<a href="https://s.click.taobao.com/4Ltaxow">
-				<span class="news-detail-img"><img src="http://img01.taobaocdn.com/bao/uploaded/i1/TB1GP6CQFXXXXcFXVXXXXXXXXXX_!!0-item_pic.jpg_150x150_.webp" width="150" height="150"/></span>
-				<h3>
-					奥义瑜伽垫初学者10MM加长防滑健身垫子加厚加宽无味瑜珈垫毯子<br>
-					专柜价 ¥ 96.00-119.00<br>
-					促销价 ¥ 29.90-39.90 
-				</h3>
-				<p class="cfx">
-               <span class="card text-right">
-               <!--input class="button button-glow button-rounded button-highlight button-small" type="submit" value="购买"-->
-			   <input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="yhgm('https://s.click.taobao.com/5QVnJqw')" value="优惠购买">
-		</span>   	
-             </p>
-            </a>
+	<div class="main-title clearfix">
+		<a href="../index.html" class="main-back"></a>
+		<div class="search fl" style="width: 80%;">
+			<form action="javascript:searchData(1);" method="get">
+				<span class="search-kw" id="tipMsg"></span>
+				<input type="hidden" name="r" value="index/search" style="width: 80%;">
+				<button class="search_submit search-in background"></button>
+				<input type="text" autocomplete="off" placeholder="关键字" value="" name="key" id="key" onchange="changehKey(this);"
+					onclick="reset(this);" onkeydown="ctype();" class="search_area" style="padding-left: 0px; width: 80%;">
+			</form>
 		</div>
-	</li>
-	<li>
-		<div class="news-detail cfx">
-			<a href="https://s.click.taobao.com/AwEaxow">
-				<span class="news-detail-img"><img src="http://img02.taobaocdn.com/bao/uploaded/i2/TB1cyk5MVXXXXc2XFXXXXXXXXXX_!!0-item_pic.jpg_150x150_.webp" width="150" height="150"/></span>
-				<h3>欧莎2017春装新款女装外套韩版翻领时尚风衣休闲中长款薄款潮春秋<br>
-					价格¥ 319.00<br>
-					促销价¥ 289.00 心动价   
-				</h3>
-				<p class="cfx">
-               <span class="card text-right">
-               	<input class="button button-glow button-rounded button-highlight button-small" type="submit" value="删除">
-			<input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="yhgm('https://s.click.taobao.com/5kGlJqw')" value="优惠购买">
-		</span>   	
-             </p>
-            </a>
-		</div>
-	</li>
-	<li>
-		<div class="news-detail cfx">
-			<a href="https://s.click.taobao.com/1MbCSpw">
-				<span class="news-detail-img"><img src="http://img04.taobaocdn.com/bao/uploaded/i4/3060219120/TB2MHcvbhtmpuFjSZFqXXbHFpXa_!!3060219120.jpg" width="150" height="150"/></span>
-				<h3>透明塑料垃圾桶 家用厨房客厅厕所卫生间大号压圈垃圾筒 无盖纸篓</h3>
-				<p class="cfx">
-                 <span class="card text-right">
-               	<input class="button button-glow button-rounded button-highlight button-small" type="submit" value="删除">
-			<input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="yhgm('https://s.click.taobao.com/sJUJztw')" value="优惠购买">
-		</span> 
-             </p>
-            </a>
-		</div>
-	</li>
-	<li>
-		<div class="news-detail cfx">
-			<a href="https://s.click.taobao.com/XThmQpw" target="_blank">
-				<span class="news-detail-img"><img src="http://img03.taobaocdn.com/bao/uploaded/i3/TB1SCgzOFXXXXXFapXXXXXXXXXX_!!0-item_pic.jpg" width="150" height="150"/></span>
-				<h3>国行ThinkPadT460P20FWA00MCD 14英寸轻薄商务笔记本电脑办<br>
-				  原价：9799元<br>  
-				   现价：9440元
-				</h3>
-				<p class="cfx">
-                 <span class="card text-right">
-               	<input class="button button-glow button-rounded button-highlight button-small" type="submit" value="删除">
-			<input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="yhgm('https://s.click.taobao.com/sJUJztw')" value="优惠购买">
-		</span> 
-             </p>
-            </a>
-		</div>
-	</li>
-	<li>
-		<div class="news-detail cfx">
-			<a href="content.html?id=543673823424">
-				<span class="news-detail-img"><img src="http://img03.taobaocdn.com/bao/uploaded/i3/TB1Y2b.OXXXXXcoXpXXXXXXXXXX_!!0-item_pic.jpg" width="150" height="150"/></span>
-				<h3>国行ThinkPadT460P20FWA0-0TCD/23CD 14英寸高性能笔记本电详情页面<br>
-					原价：10999<br>
-					现价：9999
-				</h3>
-				<p class="cfx">
-                 <span class="card text-right">
-               	<input class="button button-glow button-rounded button-highlight button-small" type="submit" value="删除">
-			<input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="yhgm('https://s.click.taobao.com/sJUJztw')" value="优惠购买">
-		</span> 
-             </p>
-            </a>
-		</div>
-	</li>
-</ul>
-    <div class="news-page">
-      <span class="card text-right">
-	    <input class="button button-glow button-rounded button-caution " type="submit" onclick="yhgm('https://s.click.taobao.com/sJUJztw')" value="优惠订阅">
-        <input class="button button-glow button-rounded button-highlight" type="submit" id="changeBtn" value="换一批看看">
-      </span>
-   </div>
-</div>
-<br>
-<footer class="footer">
-	<div class="top">
-			<a href="https://login.taobao.com/" >登录</a>|
-			<a href="https://reg.taobao.com/member/reg/fill_mobile.htm" >注册</a>
-			<a class="btn" href="#">Top</a>
 	</div>
-	<p>
-		<a href="../index.html">标准版</a> <a class="ok" href="../index.html">触屏版</a>
-	</p>
-	<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
-</footer>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
-<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
-<script>
-	var ul = $("#content"); //主体元素
-	var pageNo=1;
-	var sort=null;
-	var defaultV="优惠查询 输入您要查找的优惠商品 如，牛仔裤";
-	if($('#keyword').val()==''){
-		$('#keyword').val(defaultV);
-	}
-	
-	function changehKey(obj){
-		//alert(obj.value);
-		if(obj.value==''){
-			$('#keyword').val(defaultV);
-		}
-	}
-	function ctype(){
-		//优惠方式清空
-		var $stype = $("input[name=stype]");
-		$stype.attr("checked",false);
-	}
-	function reset(obj){
-		if(obj.value==defaultV){
-			obj.value="";
-		}
-	}
-	//优惠方式
-	function stype(t){
-		var obj=null;
-		
-		if(t==3){
-			sort='total_sales_des';
-		}
-		
-		var ul = $("#content"); //主体元素
-		ul.each(function(){
-		    var y = $(this).children();
-		    y.remove()
-		});
-		searchData(1,sort);
-	}
-	function searchData(pageNo,sort){
-		var obj=null;
-		//alert("优惠方式："+t);
-		$.jsonp({
-            url:config_path_JsonP+'/subadmin/f/sub/pTb/spsx',
-            data:{'pageNo':pageNo,'q':$('#key').val(),
-            	'fields':'title,pict_url,reserve_price,zk_final_price,provcity,item_url,volume',
-            	'sort':sort,'pageSize':5},
-            callbackParameter:"callback",
-            jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-            //jsonpCallback: "receive",//自定
-            timeout:3000,
-            dataFilter:function(json){
-                console.log("jsonp.filter:"+json.results.length);
-                for(var i=0;i<json.results.length;i++){
-                	//obj=json.get(i);
-                	console.log(json.results[i]);
-                	appendUl(json.results[i]);//拼接ul
-                }
-            },
-            success:function(json,textStatus,xOptions){
-                console.log("jsonp.success:"+json);
-            },
-            error:function(xOptions,textStatus){
-                console.log("jsonp.error:"+textStatus+", rel="+xOptions);
-            }
-        });
-	}
-	
-	function appendUl(obj){
-		//alert(obj.pictUrl);
-		ul.append('<li>'
-				+ '<div class="news-detail cfx">'
-				+ '	<a href="'+obj.itemUrl+'">'
-				+ '	<span class="news-detail-img"><img src="'+obj.pictUrl+'" width="150" height="150"/></span>'
-				+ '	<h3>'+obj.title+'<br>'
-				+'  原价：'+obj.reservePrice+'<br>折扣价：'+obj.zkFinalPrice+'<br>'
-				+'  30天销量：'+obj.volume+'   所在地：'+obj.provcity
-				+'</h3>'
-				+ '<p class="cfx">'
-				+ ' <span class="card text-right">'
-				+ '<input class="button button-glow button-rounded button-highlight button-small" type="submit" value="删除">'
-				+ '	<input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="yhgm(\'https://s.click.taobao.com/sJUJzt\')" value="优惠购买">'
-				+ '</span> '
-				+ '</p>'
-				+ ' </a>'
-				+ '</div>'
-				+ '</li>');
-	}
-	
-	$('#changeBtn').click(function(){
-		var ul = $("#content"); //主体元素
-		ul.each(function(){
-		    var y = $(this).children();
-		    y.remove()
-		});
-		searchData(pageNo++,sort);
-	});
-	//alert(config_path_JsonP);
-</script>
+	<!-- 主界面具体展示内容 -->
+	<!--div class="order-nav">
+		<ul>
+			<li class="cur"><span><a
+					href="/quan.php?r=index/search&amp;kw=%E5%A5%B3%E8%A3%85&amp;px=t&amp;u=547371">人气</a></span>
+			</li>
+			<li class=""><span><a
+					href="/quan.php?r=index/search&amp;kw=%E5%A5%B3%E8%A3%85&amp;px=latest&amp;u=547371">最新</a></span>
+			</li>
+			<li class=""><span><a
+					href="/quan.php?r=index/search&amp;kw=%E5%A5%B3%E8%A3%85&amp;px=sell&amp;u=547371">销量</a></span>
+			</li>
+			<li class=""><span><a
+					href="/quan.php?r=index/search&amp;kw=%E5%A5%B3%E8%A3%85&amp;px=price&amp;u=547371">价格</a></span>
+			</li>
+		</ul>
+	</div-->
+    <br><br>
+    <!--  广告位-->
+	<div class="goods-list" data-page="2" id="content">
+		<!-- div class="goods-item">
+			<a href="/quan.php?r=p/d&amp;id=2417765&amp;u=547371" class="img">
+				<span class="today-wrapper"> <span>今日</span> <span>新品</span>
+			</span> <span class="coupon-wrapper"> <span class="coupon"
+					style="color: #EDFF00;">独家券</span> <span class="price">40元</span>
+			</span> <img
+				src="https://img.alicdn.com/bao/uploaded/i4/TB1SWZnQFXXXXcUXVXXXXXXXXXX_!!0-item_pic.jpg_230x230.jpg"
+				alt="">
+			</a> <a href="/quan.php?r=p/d&amp;id=2417765&amp;u=547371" class="title">
+				<div class="text" style="color: #777777;">夏装新款欧洲站时尚套装三件套</div>
+			</a>
+			<div class="price-wrapper">
+				<span class="text">券后</span> <span class="price">￥118</span>
+				<div class="sold-wrapper">
+					<span class="sold-num">15473</span> <span class="text">人已买</span>
+				</div>
+			</div>
+		</div>
+		<div class="goods-item">
+			<a href="/quan.php?r=p/d&amp;id=2417510&amp;u=547371" class="img">
+				<span class="today-wrapper"> <span>今日</span> <span>新品</span>
+			</span> <span class="coupon-wrapper"> <span class="coupon"
+					style="color: #EDFF00;">独家券</span> <span class="price">20元</span>
+			</span> <img
+				src="https://img.alicdn.com/imgextra/i1/2767105829/TB2VMpTmTcCL1FjSZFPXXXZgpXa_!!2767105829.jpg_230x230.jpg"
+				alt="">
+			</a> <a href="/quan.php?r=p/d&amp;id=2417510&amp;u=547371" class="title">
+				<div class="text" style="color: #777777;">【芊姿铭】宽松休闲刺绣衬衫</div>
+			</a>
+			<div class="price-wrapper">
+				<span class="text">券后</span> <span class="price">￥29.9</span>
+				<div class="sold-wrapper">
+					<span class="sold-num">1579</span> <span class="text">人已买</span>
+				</div>
+			</div>
+		</div>
+		<div class="goods-item">
+			<a href="/quan.php?r=p/d&amp;id=2413534&amp;u=547371" class="img">
+				<span class="today-wrapper"> <span>今日</span> <span>新品</span>
+			</span> <span class="coupon-wrapper"> <span class="coupon"
+					style="color: #EDFF00;">独家券</span> <span class="price">30元</span>
+			</span> <img
+				src="https://img.alicdn.com/imgextra/i1/473203290/TB2rNmJo9tkpuFjy0FhXXXQzFXa_!!473203290.jpg_230x230.jpg"
+				alt="">
+			</a> <a href="/quan.php?r=p/d&amp;id=2413534&amp;u=547371" class="title">
+				<div class="text" style="color: #777777;">ZKRR品牌卡通松鼠女装短袖</div>
+			</a>
+			<div class="price-wrapper">
+				<span class="text">券后</span> <span class="price">￥39</span>
+				<div class="sold-wrapper">
+					<span class="sold-num">3617</span> <span class="text">人已买</span>
+				</div>
+			</div>
+		</div-->
+	</div>
 
+	<div class="pullup-goods">
+		<div class="label" id="label">商品加载中...</div>
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
+	<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+	<script src="../config/config.js"></script>
+	<script>
+		var q = window.location.href;
+		q = q.split('=')[1];
+		q = decodeURIComponent(q);
+		//alert(q);
+		var defaultV = "";
+		if (q != 'undefined' && q != defaultV) {
+			$('#key').val(q);
+			search();
+		}
+		if ($('#key').val() == '') {
+			$('#key').val(defaultV);
+		}
+		function changehKey(obj) {
+			//alert(obj.value);
+			if (obj.value == '') {
+				$('#key').val(defaultV);
+			}
+		}
+		function ctype() {
+			//优惠方式清空
+			var $stype = $("input[name=stype]");
+			$stype.attr("checked", false);
+		}
+		function reset(obj) {
+			if (obj.value == defaultV) {
+				//obj.value = "";
+			}
+		}
+		function search() {
+			if ($('#key').val() == '') {
+				alert('请输入商品关键字');
+				$('#key').focus();
+				return false;
+			}
+			var ul = $("#content"); //主体元素
+			ul.each(function() {
+				var y = $(this).children();
+				y.remove()
+				//console.log('2222:'+y.remove());
+			});
+			searchData(1);
+		}
+
+		function searchData(pageNo) {
+			//alert($('#key').val());
+			if(pageNo==1&&$('#key').val()!=""){
+				$("#content").html(""); //主体元素
+			}
+			var obj = null;
+			//alert("优惠方式："+pageNo+$('#key').val());
+			$.jsonp({
+				url : config_path_JsonP+'/subadmin/f/sub/yhcx/data',
+				data : {
+					'page' : pageNo,
+					'key' : $('#key').val()
+					//'fields' : 'title,pict_url,reserve_price,zk_final_price,provcity,item_url,volume,num_iid',
+					//'sort' : 'total_sales_des'
+				},
+				callbackParameter : "callback",
+				jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+				//jsonpCallback: "receive",//自定
+				timeout : 3000,
+				dataFilter : function(json) {
+					//alert("ddddd"+json);
+					if(json==''){
+						$('#label').html("没有找到商品");
+					}else if(null!=json){
+						console.log("jsonp.filter:" + json);
+						for (var i = 1; i < json.length; i++) {
+							//obj=json.get(i);
+							console.log(json);
+							//console.log(json.results[i]);
+							appendUl(json[i]);//拼接ul
+						}
+					}else if($('#key').val() == ''||$('#key').val() == '输入关键词搜索'){
+						$('#label').html("请输入关键字搜索");
+					}else {
+						$('#label').html("没有商品了");
+					}
+				},
+				success : function(json, textStatus, xOptions) {
+					console.log("jsonp.success:" + json);
+				},
+				error : function(xOptions, textStatus) {
+					console.log("jsonp.error:" + textStatus + ", rel="+ xOptions);
+				}
+			});
+		}
+
+		function appendUl(obj) {
+			var content = $("#content"); //主体元素
+			content.append('<div class="goods-item">'
+				+ '<a href="yhcxCont.html?id='+obj.goodsId+'"  class="img">'
+				+ '<span class="coupon-wrapper">'
+				+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
+				+ '<span class="price">'+obj.quanPrice+'元</span>'
+				+ ' </span>'
+				+ ' <img src="'+obj.pic+'" alt="">'
+				+ '</a>'
+				+ '<a href="yhcxCont.html?id='+obj.numIid+'" target="_blank" class="title">'
+				+ '    <div class="text" style=" color:#777777;">'+obj.title+'</div>'
+				+ '</a>' + '<div class="price-wrapper">'
+				+ '    <span class="text">券后</span>'
+				+ '    <span class="price">￥'+obj.price+'</span>'
+				+ '   <div class="sold-wrapper">'
+				+ '       <span class="sold-num">'+obj.salesNum+'</span>'
+				+ '       <span class="text">人已买</span>'
+				+ '   </div></div></div>');
+		}
+		//alert(config_path_JsonP);
+		searchData(1);
+	</script>
+	<script type="text/javascript">
+	$(document).ready(
+		function() {
+			var range = 50; //距下边界长度/单位px
+			var elemt = 500; //插入元素高度/单位px
+			var maxnum = 2000; //设置加载最多次数
+			var num = 2;
+			var totalheight = 0;
+			$(window).scroll(
+				function() {
+					var srollPos = $(window).scrollTop(); //滚动条距顶部距离(页面超出窗口的高度)
+
+					//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+					//console.log("页面的文档高度 ："+$(document).height());
+					//console.log('浏览器的高度：'+$(window).height());
+
+					totalheight = parseFloat($(window).height())+ parseFloat(srollPos);
+					if (($(document).height() - range) <= totalheight&& num != maxnum) {
+						//alert("调用ajax加载新内容 追加到页面底部");
+						searchData(num);
+						num++;
+						//alert(num);
+					}
+				});
+		}
+	);
+	</script>
 </body>
 </html>
