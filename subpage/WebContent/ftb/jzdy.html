@@ -56,8 +56,7 @@
 		<form id="jzdy">
 			<ul class="news-list">
 				<li>
-
-					<div class="news-detail " style="height: 300px;">
+					<div class="news-detail " style="height: 365px;">
 						<div style="margin-bottom: 1rem;">
 							<select class="form-control" style="width: 100%;" id="type"
 								name="type">
@@ -69,8 +68,8 @@
 							</select>
 						</div>
 						<div class="form-group ">
-							<input class="form-control " type="text" name="url"
-								placeholder="请输入商品URL或者客户端商品分享链接" id="url" /> 
+							<textarea class="form-control " style="width: 100%;height: 100px;" name="url"
+								placeholder="请输入商品URL或者客户端商品分享链接" id="url" ></textarea>
 							<input type="hidden" name="goodsId" value="" id="goodsId" />
 							<input type="hidden" name="content" value="" id="content" />
 						</div>
@@ -111,7 +110,7 @@
 				</div>
 				<div id="goumai2" style="display: none;">
 					<input class="button button-glow button-rounded button-caution "
-						style="width: 40%; margin-left: 2px;" type="button" value="优惠购买"
+						style="width: 40%; margin-left: 2px;" type="button" onclick="yhgm()" value="优惠购买"
 						id="buy">
 					<input class="button button-glow button-rounded button-caution "
 						style="width: 40%; margin-left: 2px;" type="button" value="优惠幅度太低"
@@ -134,7 +133,9 @@
 	</footer>
 </body>
 <script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+<script src="../config/config.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
 <script type="text/javascript">
 	var wait = 90;
 	//验证码
@@ -298,11 +299,13 @@
 	 *验证是否存在此商品
    	 */
 	function goods(id){
+		/***
 		$.ajax({
 			type:"post",
 			dataType:"text",
 			url:config_path_JsonP+'/subadmin/f/sub/jzdy/goods?goodsId='+id,
 			success:function(data){
+				//alert("data:"+data);
 				if(data!=null&&data!=""){
 					var list=eval('(' + data + ')');
 						//有次商品，展开购买div，隐藏订阅div
@@ -321,9 +324,51 @@
 				}
 			}
 		});
+		
+		**/
+		
+		
+		$.jsonp({
+			url:config_path_JsonP+'/subadmin/f/sub/jzdy/goods?goodsId='+id,
+			callbackParameter : "callback",
+			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+			//jsonpCallback: "receive",//自定
+			timeout : 3000,
+			dataFilter : function(json) {
+				if(json!=null&&json!=""){
+				    //alert("ddddd"+json[0]);
+					//var list=eval('(' + json + ')');
+						//有次商品，展开购买div，隐藏订阅div
+					document.getElementById("dingyue1").style.display="none";
+					document.getElementById("dingyue2").style.display="none";
+					document.getElementById("goumai1").style.display="block";
+					document.getElementById("goumai2").style.display="block";
+					appendUl(json[0]);
+				}else{
+					alert("此商品暂无优惠券");
+					//$("#dingyue1").style('display','block');
+					document.getElementById("dingyue1").style.display="block";
+					document.getElementById("dingyue2").style.display="block";
+					document.getElementById("goumai1").style.display="none";
+					document.getElementById("goumai2").style.display="none";
+				}
+			},
+			success : function(json, textStatus, xOptions) {
+				console.log("jsonp.success:" + json);
+			},
+			error : function(xOptions, textStatus) {
+				console.log("jsonp.error:" + textStatus + ", rel="+ xOptions);
+			}
+		});
+		
+		
 	}
 	
+	var buyUrl='';
 	function appendUl(obj){
+		buyUrl=obj.qQuanMLink;
+		console.log(buyUrl);
+		console.log(obj);
 		var ul = $("#goumai1"); //主体元素
 		var ss='<li>'
 				+ '<div class="news-detail cfx">'
@@ -336,7 +381,11 @@
 				+ ' </a>'
 				+ '</div>'
 				+ '</li>';
-				ul.html(ss);
+	   ul.html(ss);
+	   
+	}
+	function yhgm(){
+		location.href=buyUrl;
 	}
 </script>
 </html>
