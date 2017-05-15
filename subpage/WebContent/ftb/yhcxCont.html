@@ -2,73 +2,96 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>优惠查询-详情页面</title>
-<link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
-<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
-<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
-<link rel="stylesheet" href="../css/wap/korea.css">
-<style type="text/css">
-	.search{
-		border: 1;line-height: 30px;border-radius: 10px;width: 95%;overflow: hidden;outline:none;
-		background: #ffffe9;text-indent: 2em;color:#666;
-	}
-	.yhxx{
-		 border: 1px solid rgba(0,0,0,.15);
-		 margin-top: 5px;
-	}
-	</style>
-	<style type="text/css">
-	*{margin:0; padding:0;}
-	a{text-decoration: none;}
-	img{max-width: 100%; height: auto;}
-	.weixin-tip{display: none; position: fixed; left:0; top:0; bottom:0; background: rgba(0,0,0,0.8); filter:alpha(opacity=80);  height: 100%; width: 100%; z-index: 100;}
-	.weixin-tip p{text-align: center; margin-top: 10%; padding:0 5%;}
-	</style>
-<meta name="viewport"
-	content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0, maximum-scale=1.0">
-<meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>商品详情</title>
+    <meta name="Keywords" content="券购365,优惠券折扣">
+    <meta name="Description" content="券购365-优惠券折扣直播第一站！每天更新千款，纯人工筛选验货，限时限量特卖，全场1折包邮！">
+    
+    <link rel="stylesheet" href="../css/wap_common.css" type="text/css" />
+    <link rel="stylesheet" href="../css/wapshow.css" type="text/css" />
+    
 </head>
 <body>
-<div class="weixin-tip">
-		<p>
-			<img src="live_weixin.png" alt="微信打开"/>
-		</p>
-	</div>
-<div class="news" style="display: block;margin-top: 0em;">
-     <div class="news-fixed">
-         <a href="javascript:window.history.go(-1)" class="fl"></a>
-         <h1>商品详情</h1>
-     </div>
-     <div  style="text-align: center;">
-		<img alt="" id="picUrl" src="" width="100%"/><br>
-		<span id="title" style="font-size: 16px;font-weight: bold;"></span><br>
-		一口价：<span id=reservePrice></span>&nbsp;
-		月销量：<span id="volume"></span><br>
-		<span style="font-size: 16px;font-weight: bold;color: red">折扣价：<span id="zkj"></span></span><br>
-		<input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="detail()" value="查看详情">
-		<a id="buyquan" biz-itemid="" isconvert=1 href="#" to="" onclick="javascript:buyquan()">
-		<input class="button button-glow button-rounded button-caution button-small" type="submit"  value="领券购买">
-		</a><a id="buylink" biz-itemid="" isconvert=1 href="#" to="" onclick="javascript:buylink()">
-		<input class="button button-glow button-rounded button-caution button-small" type="submit"  value="立即购买">
-		</a>
-     </div>
-	 <div id="detail" style="text-align: center;margin-top: 10px;"></div>
+<div class="main-title clearfix">
+    <a href="javascript:window.history.go(-1)" class="main-back"></a>
+    <a class="mui-action-menu main-more" href="../index.html" id="mui-action-menu"></a>
 </div>
-<br>
-<footer class="footer">
-	<div class="top">
-			<a href="https://login.taobao.com/" >登录</a>|
-			<a href="https://reg.taobao.com/member/reg/fill_mobile.htm" >注册</a>
-			<a class="btn" href="#">Top</a>
-	</div>
-	<p>
-		<a href="../index.html">标准版</a> <a class="ok" href="../index.html">触屏版</a>
-	</p>
-	<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
-</footer>
+<!-- 主界面具体展示内容 -->
+<div class="detail-wrapper img">
+        <a id="buyquan" biz-itemid="" isconvert=1 href="#" to="" onclick="javascript:buyquan()">
+        <div class="img">
+            <img alt="" id="picUrl" src="" width="100%"/>
+        </div>
+        <div class="title-wrapper clearfix" id="title">
+                        甜美公主裙蕾丝裙2017夏季新款宽松大码显瘦
+        </div>
+    </a>
+
+            <div class="recommend-wrapper">
+            <div class="text">
+                <span>小编推荐：</span><bb id="introduce"></bb></div>
+        </div>
+    
+    <!-- 咚咚抢 -->
+    
+        <div class="goods-jq clearfix">
+        <div class="goods-price fl">券后价<b><i>￥</i><span id="zkj"></span></b></div>
+        <div class="goods-quan shoufa-quan fl"><span>券</span><b id="quanPrice"></b></div>
+        <div class="goods-num fr">
+            <i></i>月销量 <b id="volume"></b>
+        </div>
+
+    </div>
+</div>
+<div class="test-area"></div>
+<div class="tuwen-tkl">
+    <!-- $this->isIOS==2 表示微信端-->
+        <div class="pic-detail">
+        <div class="pic-detail-btn" data-goodsid="547777882464">
+            <span class="pic-detail-btn-span" onclick="detail()">查看图文详情<i></i></span>
+        </div>
+        <div id="detail" style="text-align: center;margin-top: 10px;"></div>
+    </div>
+
+</div>
+
+<div class="weixin-tip">
+    <div class="wechat-line"></div>
+    <div class="wechat-brow"></div>
+        <div class="weixin-cover"></div>
+</div>
+
+<!-- 精品推荐 -->
+<div class="pos-box clearfix">
+    <div class="pos-title">
+        <p><i></i>精品推荐<b></b></p>
+    </div>
+    <div class="ads-list" data-page="0" id="jptj">
+                     
+    </div>
+</div >
+
+
+<div class="buy-wrapper img" style="padding-right: 0;">
+    <span class="price">券后价：<i>¥<b style="font-size:22px;" id="price"></b></i></span>
+    <a href="javascript:buyquan()" class="buy-2he1 ui-link" >领券购买</a>
+    <a href="javascript:buyquan()" class="quan-2he1 ui-link" >
+        优惠券<br><span style="font-size: 15px;color: #ffffff; " id="qp">20元</span>
+    </a>
+</div>
+
+
+<div id="copy_dom" style="" class="copy_dom"></div>
+<div class="toTop" style="display: none;"></div>
+<div style="display: none;">
+    </div>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
 <script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+
 <script>
 //接收传递的参数
 var href = window.location.href;
@@ -83,7 +106,7 @@ $.jsonp({
     //jsonpCallback: "receive",//自定
     timeout:3000,
     dataFilter:function(json){
-        console.log("jsonp.filter:"+json);
+        console.log("jsonp.filter:"+json[0]);
         for(var i=0;i<json.length;i++){
         	//obj=json.get(i);
         	console.log('图片URL:'+json[0].pic);
@@ -91,9 +114,13 @@ $.jsonp({
         	$('#picUrl').attr('src',json[0].pic);
         	$('#title').html(json[0].title);
         	$('#zkj').html(json[0].price);
+        	$('#price').html(json[0].price);
         	$('#volume').html(json[0].salesNum);
         	$('#reservePrice').html(json[0].orgPrice);
-        	$('#buylink').attr('biz-itemid',json[0].goodsId);
+        	$('#quanPrice').html("<i>￥</i>"+json[0].quanPrice);
+        	$('#qp').html(json[0].quanPrice+"元");
+        	$('#buylink').attr('href',json[0].goodsId);
+        	$('#introduce').html(json[0].introduce);
         	if(json[0].aliClick==null){
         		$('#buylink').attr('to','https://detail.tmall.com/item.htm?id='+json[0].goodsId);
         	}else{
@@ -123,13 +150,15 @@ function detail(){
 	    //jsonpCallback: "receive",//自定
 	    timeout:3000,
 	    dataFilter:function(json){
-	        console.log("jsonp.filter:"+json.results.length);
+	    	console.log('json filter');
+	        console.log(json.results);
 	        for(var i=0;i<json.results.length;i++){
-	        	//obj=json.get(i);
-	        	console.log('图片URL:'+json.results[i].pictUrl);	        	
+	        	console.log('图片');
+	        	console.log(json.results[i].smallImages);	        	
 	        	for(var ii=0;ii<json.results[i].smallImages.length;ii++){
 	        		temp+='<img width="100%" src="'+json.results[i].smallImages[ii]+'"/>';
 	        	}
+	        	temp+='<br>';
 	        	$('#detail').html(temp);
 	        }
 	    },
@@ -202,7 +231,65 @@ function closeW(){
 	}
 	
 }
-	</script>
+</script>
+<!-- 精品推荐 -->
+<script type="text/javascript">
+searchData(1);
+function searchData(pageNo) {
+	//alert($('#key').val());
+		$("#content").html(""); //主体元素
+	var obj = null;
+	$.jsonp({
+		url : config_path_JsonP+'/subadmin/f/sub/yhcx/data',
+		data : {
+			'page' : pageNo,
+			'key'  :''
+		},
+		callbackParameter : "callback",
+		jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+		//jsonpCallback: "receive",//自定
+		timeout : 3000,
+		dataFilter : function(json) {
+			if(null!=json){
+				//console.log(json);
+				for (var i = 1; i < json.length; i++) {
+					appendUl(json[i]);//拼接ul
+				}
+			}else if($('#key').val() == ''||$('#key').val() == '输入关键词搜索'){
+				$('#label').html("请输入关键字搜索");
+			}else {
+				$('#label').html("没有商品了");
+			}
+		},
+		success : function(json, textStatus, xOptions) {
+			console.log("jsonp.success:" + json);
+		},
+		error : function(xOptions, textStatus) {
+			console.log("jsonp.error:" + textStatus + ", rel="+ xOptions);
+		}
+	});
+}
 
-</body>
-</html>
+function appendUl(obj) {
+	var content = $("#jptj"); //主体元素
+	content.append('<div class="goods-item">'
+		+ '<a href="yhcxCont.html?id='+obj.goodsId+'"  class="img">'
+		+ '<span class="coupon-wrapper">'
+		+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
+		+ '<span class="price">'+obj.quanPrice+'元</span>'
+		+ ' </span>'
+		+ ' <img src="'+obj.pic+'" alt="">'
+		+ '</a>'
+		+ '<a href="yhcxCont.html?id='+obj.numIid+'" target="_blank" class="title">'
+		+ '    <div class="text" style=" color:#777777;">'+obj.title+'</div>'
+		+ '</a>' + '<div class="price-wrapper">'
+		+ '    <span class="text">券后</span>'
+		+ '    <span class="price">￥'+obj.price+'</span>'
+		+ '   <div class="sold-wrapper">'
+		+ '       <span class="sold-num">'+obj.salesNum+'</span>'
+		+ '       <span class="text">人已买</span>'
+		+ '   </div></div></div>');
+}
+</script>
+
+</body></html>

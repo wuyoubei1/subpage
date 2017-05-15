@@ -122,20 +122,19 @@
 		var obj=null;
 		//alert("优惠方式："+t);
 		$.jsonp({
-			url:config_path_JsonP+'/subadmin/f/sub/pTb/spsx',
-			data:{'pageNo':pageNo,'q':$('#key').val(),
-            	'fields':'title,pict_url,reserve_price,zk_final_price,provcity,item_url,volume,num_iid',
-            	'sort':'total_sales_des'},
+			url:config_path_JsonP+'/subadmin/f/sub/tqg/data',
+			data:{'page':pageNo,'key':$('#key').val()},
             callbackParameter:"callback",
             jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
             //jsonpCallback: "receive",//自定
             timeout:3000,
             dataFilter:function(json){
-            	console.log("jsonp.filter:"+json.results.length);
-                for(var i=1;i<json.results.length;i++){
+            	console.log(json);
+            	console.log(json.length);
+                for(var i=1;i<json.length;i++){
                 	//obj=json.get(i);
-                	console.log(json.results[i]);
-                	appendUl(json.results[i]);//拼接ul
+                	console.log(json[i]);
+                	appendUl(json[i]);//拼接ul
                 }
             },
             success:function(json,textStatus,xOptions){
@@ -143,20 +142,21 @@
             },
             error:function(xOptions,textStatus){
                 console.log("jsonp.error:"+textStatus+", rel="+xOptions);
+                console.log(xOptions);
             }
         });
 	}
 	
 	function appendUl(obj){
-		//alert(obj.pictUrl);
+		console.log(obj.picUrl);
 		var ul = $("#content"); //主体元素
 		ul.append('<li>'
 				+ '<div class="news-detail cfx">'
-				+ '	<a href="content.html?id='+obj.numIid+'" target="_blank">'
-				+ '	<span class="news-detail-img"><img src="'+obj.pictUrl+'" width="150" height="150"/></span>'
+				+ '	<a href="qgCont.html?id='+obj.numiid+'&key=encodeURIComponent('+$('#key').val()+')" >'
+				+ '	<span class="news-detail-img"><img src="'+obj.picUrl+'" width="150" height="150"/></span>'
 				+ '	<h3 style="height:150px;">'+obj.title+'元<br>'
 				+'  原&nbsp;价：'+obj.reservePrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.zkFinalPrice+'元</b></font><br>'
-				+'  30天销量：'+obj.volume+'件 <br>宝贝所在：'+obj.provcity
+				+'  总数量：'+obj.totalAmount+'件 <br>已抢数量：'+obj.soldNum
 				+'  </h3>'
 				+ ' </a>'
 				+ '</div>'

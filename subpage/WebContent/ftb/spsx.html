@@ -123,7 +123,7 @@
 		var obj=null;
 		//alert("优惠方式："+t);
 		$.jsonp({
-			url:config_path_JsonP+'/subadmin/f/sub/pTb/spsx',
+			url:'http://localhost:8080/subadmin/f/sub/pTb/spsx',
 			data:{'pageNo':pageNo,'q':$('#key').val(),
             	'fields':'title,pict_url,reserve_price,zk_final_price,provcity,item_url,volume,num_iid',
             	'sort':'total_sales_des'},
@@ -188,7 +188,8 @@
 						num++;
 					}
 				});
-		});
+		}
+	);
 </script>
 </body>
 </html>

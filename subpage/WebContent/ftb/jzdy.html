@@ -133,7 +133,6 @@
 	</footer>
 </body>
 <script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
-<script src="../config/config.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
 <script type="text/javascript">
@@ -219,8 +218,8 @@
 		$("#url").blur(function() {
 			var url = $("#url").val();
 			if(url.length!=0){
-				var match=/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
-				if(match.test(url)){
+				//var match=/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
+				//if(match.test(url)){
 					var url2 = url.substring(url.indexOf("id"), url.length);
 					var id;
 					if(url2.length>15){
@@ -231,9 +230,9 @@
 					$("#goodsId").val(id);
 					//验证是否存在此商品的优惠券
 					goods(id);
-				}else{
-					alert("不是正确的链接，请核实！");
-				}
+				//}else{
+				//	alert("不是正确的链接，请核实！");
+				//}
 			}
 		});
 		/*
