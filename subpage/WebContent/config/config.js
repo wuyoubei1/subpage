@@ -3,4 +3,4 @@
  * 包括远程访问路径 
  */
 /***后台系统 提供数据的地址  jsonP格式返回**/
-config_path_JsonP='http://www.quangou365.com';
+config_path_JsonP='http://localhost:8080';
