@@ -54,6 +54,8 @@
 			<h1>精准订阅</h1>
 		</div>
 		<form id="jzdy">
+			<input type="hidden" name="goodsId" value="" id="goodsId" />
+			<input type="hidden" name="content" value="" id="content" />
 			<ul class="news-list">
 				<li>
 					<div class="news-detail " style="height: 365px;">
@@ -67,15 +69,7 @@
 								<option value="4">品牌订阅</option>
 							</select>
 						</div>
-						<div class="form-group ">
-							<textarea class="form-control " style="width: 100%;height: 100px;" name="url"
-								placeholder="请输入商品URL或者客户端商品分享链接" id="url" ></textarea>
-							<input type="hidden" name="goodsId" value="" id="goodsId" />
-							<input type="hidden" name="content" value="" id="content" />
-						</div>
-						
-						
-						<div id="dingyue1" >
+						<div id="dingyue" >
 							<div class="form-group ">
 								<input class="form-control " style="margin-right: 25px;"
 									type="text" name="price" placeholder="商品最低提醒价格" id="price" />
@@ -96,8 +90,6 @@
 									type="button" id="hsbtn" value="获取验证码">
 							</div>
 						</div>
-						<div id="goumai1" style="display: none;">
-						</div>
 					</div>
 				</li>
 			</ul>
@@ -107,14 +99,6 @@
 					<input class="button button-glow button-rounded button-caution "
 						style="width: 40%; margin-left: 2px;" type="button" value="订阅"
 						id="saveBtn">
-				</div>
-				<div id="goumai2" style="display: none;">
-					<input class="button button-glow button-rounded button-caution "
-						style="width: 40%; margin-left: 2px;" type="button" onclick="yhgm()" value="优惠购买"
-						id="buy">
-					<input class="button button-glow button-rounded button-caution "
-						style="width: 40%; margin-left: 2px;" type="button" value="优惠幅度太低"
-						id="isno">	
 				</div>
 			</div>
 		</form>
@@ -181,17 +165,20 @@
 
 		/***保存表单**/
 		$("#saveBtn").click(function() {
+			var s=location.search.substring(1);//这个就是页面?后面的内容，自己处理一下
+			s=s.replace('goodsId=','');
+			$("#goodsId").val(s);
 			var flag=checkForm();
 			if(flag){
-				$.ajax({
-					cache : true,
-					type : "POST",
+				$.jsonp({
+					type : "post",
 					dataType : "text",
 					url : config_path_JsonP+"/subadmin/f/sub/jzdy/save",
+					callbackParameter : "callback",
+					jsonp : "callback",
 					data : $('#jzdy').serialize(),// 你的formid
-					async : false,
 					error : function(request) {
-						//alert("Connection error");
+						alert("Connection error");
 					},
 					success : function(data) {
 						if (data == '0') {
@@ -213,25 +200,7 @@
 			}
 
 		});
-		/**
-			验证连接是否为有效连接
-		 */
-		$("#url").blur(function() {
-			var url = $("#url").val();
-			if(url.length!=0){
-				var match=/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
-				if(match.test(url)){
-					//是连接
-					checkUrl(url);
-				}else if(url.indexOf("http")>0){
-					//包含连接
-					url=url.substring(url.indexOf("http"),url.length);
-					checkUrl(url);
-				}else{
-					alert("不是正确的链接，请核实！");
-				}
-			}
-		});
+		
 		/*
 		 *验证码验证
 		 */
@@ -239,18 +208,16 @@
 			var msg = $("#msg").val();
 			var mobile = $("#mobile").val();
 			if (msg.length != 0) {
-			$.ajax({
+			$.jsonp({
 				type : "post",
 				datatype : "text",
 				url : config_path_JsonP+"/subadmin/f/sub/shortmsg/check?msg="+ msg + "&mobile=" + mobile,
+				callbackParameter : "callback",
+				jsonp : "callback",
 				success : function(data) {
-				//alert(data);
 					if (data == '0') {
 						alert("验证码已过期，请重新获取！！");
 							$('#hsbtn').removeAttr("disabled").html('重发验证码');
-					}
-					if (data == '1') {
-						//alert("验证通过！");
 					}
 					if (data == '2') {
 						alert("验证码错误，请输入正确的验证码！");
@@ -259,22 +226,23 @@
 			});
 		}
 	});
-		function checkForm(){
-			var flag=false;
-			var msg = $("#msg").val();
-			var mobile = $("#mobile").val();
-			var url = $("#url").val();
-			var price=$("#price").val();
-			var priceMax=$("#priceMax").val();
-			if(msg.length!=0&&mobile.length!=0&&url.length!=0&&price.length!=0&&priceMax.length!=0){
-				flag=true;
-			}
-			if(price>priceMax){
-				flag=false;
-				alert("最高价格不应小于最低价格")
-			}
-			return flag;
+		
+	function checkForm(){
+		var flag=false;
+		var msg = $("#msg").val();
+		var mobile = $("#mobile").val();
+		var url = $("#url").val();
+		var price=$("#price").val();
+		var priceMax=$("#priceMax").val();
+		if(msg.length!=0&&mobile.length!=0&&price.length!=0&&priceMax.length!=0){
+			flag=true;
 		}
+		if(price>priceMax){
+			flag=false;
+			alert("最高价格不应小于最低价格")
+		}
+		return flag;
+	}
 		
 })
 	/**
@@ -282,110 +250,16 @@
 	 */
 	function fsyzm(mb) {
 		var url = config_path_JsonP+'/subadmin/f/sub/shortmsg/gv';
-		$.ajax({
+		$.jsonp({
 			type : "post",
 			url : url + "?mobile=" + mb,
-			dataType : "json",
+			dataType : "jsonp",
 			success : function(data) {
 				alert(data.message);
 			}
 		});
 	}
-	/*
-	 *验证是否存在此商品
-   	 */
-	function goods(id){
-		$.jsonp({
-			url:config_path_JsonP+'/subadmin/f/sub/jzdy/goods?goodsId='+id,
-			callbackParameter : "callback",
-			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-			//jsonpCallback: "receive",//自定
-			timeout : 3000,
-			dataFilter : function(json) {
-				if(json!=null&&json!=""){
-				    //alert("ddddd"+json[0]);
-					//var list=eval('(' + json + ')');
-						//有次商品，展开购买div，隐藏订阅div
-					document.getElementById("dingyue1").style.display="none";
-					document.getElementById("dingyue2").style.display="none";
-					document.getElementById("goumai1").style.display="block";
-					document.getElementById("goumai2").style.display="block";
-					appendUl(json[0]);
-				}else{
-					alert("此商品暂无优惠券");
-					//$("#dingyue1").style('display','block');
-					document.getElementById("dingyue1").style.display="block";
-					document.getElementById("dingyue2").style.display="block";
-					document.getElementById("goumai1").style.display="none";
-					document.getElementById("goumai2").style.display="none";
-				}
-			},
-			success : function(json, textStatus, xOptions) {
-				console.log("jsonp.success:" + json);
-			},
-			error : function(xOptions, textStatus) {
-				console.log("jsonp.error:" + textStatus + ", rel="+ xOptions);
-			}
-		});
-		
-		
-	}
-	
-	var buyUrl='';
-	function appendUl(obj){
-		buyUrl=obj.qQuanMLink;
-		console.log(buyUrl);
-		console.log(obj);
-		var ul = $("#goumai1"); //主体元素
-		var ss='<li>'
-				+ '<div class="news-detail cfx">'
-				+ '	<a href="content.html?id='+obj.goodsId+'" target="_blank">'
-				+ '	<span class="news-detail-img"><img src="'+obj.pic+'" width="150" height="150"/></span>'
-				+ '	<h3 style="height:150px;">'+obj.price+'元<br>'
-				+'  原&nbsp;价：'+obj.orgPrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.price+'元</b></font><br>'
-				+'  30天销量：'+obj.salesNum+'件 <br><font style="color:black;font-size:16px;"><b>'+obj.title+'元</b></font><br>'
-				+'  </h3>'
-				+ ' </a>'
-				+ '</div>'
-				+ '</li>';
-	   ul.html(ss);
-	   
-	}
-	function yhgm(){
-		location.href=buyUrl;
-	}
-	/*从长连接中截取id*/
-	 function getId(url){
-			var url2 = url.substring(url.indexOf("id"), url.length);
-			var id;
-			if(url2.length>15){
-				 id= url2.substring(3, url2.indexOf("&"));
-			}else{
-				id = url2.substring(3, url2.length);
-			}
-			$("#goodsId").val(id);
-			//验证是否存在此商品的优惠券
-			goods(id);
-	 }
-	/*
-	   区分长短连接，并处理
-	*/
-	function checkUrl(url){
-		if(url.indexOf("id")>0){
-			//是http开始的链接，并且包含有id，为长连接
-			getId(url);
-		}else{
-			//短连接,需要进行转换
-			$.jsonp({
-			url:config_path_JsonP+'/subadmin/f/sub/jzdy/url?url='+url,
-			callbackParameter : "callback",
-			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-			timeout : 3000,
-			dataFilter : function(json) {
-				goods(json);
-				}
-			});
-		}
-	}
+
+
 </script>
 </html>

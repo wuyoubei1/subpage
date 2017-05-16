@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>精准订阅</title>
+<link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
+<link rel="stylesheet"
+	href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
+<link rel="stylesheet" href="../css/wap/korea.css">
+<link rel="stylesheet"
+	href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
+<style type="text/css">
+.search {
+	border: 1;
+	line-height: 30px;
+	border-radius: 10px;
+	width: 95%;
+	overflow: hidden;
+	outline: none;
+	background: #ffffe9;
+	text-indent: 2em;
+	color: #666;
+}
+
+.yhxx {
+	border: 1px solid rgba(0, 0, 0, .15);
+	margin-top: 5px;
+}
+
+.form-group {
+	margin-bottom: 1rem;
+	padding-right: 20px;
+}
+
+.row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+</style>
+
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0, maximum-scale=1.0">
+<meta content="telephone=no" name="format-detection" />
+</head>
+<body>
+	<div class="news" style="display: block; margin-top: 0em;">
+		<div class="news-fixed">
+			<a href="../index.html" class="fl"></a>
+			<h1>精准订阅</h1>
+		</div>
+		<div id="shangpin"></div>
+		<div id="goumai">
+			<input class="button button-glow button-rounded button-caution "
+				style="width: 40%; margin-left: 5%;" type="button" onclick="yhgm()"
+				value="购买" id="buy"> 
+				<input class="button button-glow button-rounded button-caution "
+				style="width: 40%; margin-left: 5%;" type="button" value="订阅"
+				id="isno">
+		</div>
+	</div>
+	<br>
+	<footer class="footer">
+		<div class="top">
+			<a href="https://login.taobao.com/">登录</a>| <a
+				href="https://reg.taobao.com/member/reg/fill_mobile.htm">注册</a> <a
+				class="btn" href="#">Top</a>
+		</div>
+		<p>
+			<a href="../index.html">标准版</a> <a class="ok" href="../index.html">触屏版</a>
+		</p>
+		<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
+	</footer>
+</body>
+<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+<script src="../config/config.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
+<script type="text/javascript">
+
+	window.onload = function(){
+		var storage=window.localStorage;
+		var json=storage.getItem("data");
+		alert(json);
+		var jsonObj=JSON.parse(json);
+		appendUl(jsonObj);
+	}
+	
+	
+	
+	var buyUrl='';
+	/*数据展示到页面*/
+	function appendUl(obj){
+		buyUrl=obj.qQuanMLink;
+		console.log(buyUrl);
+		console.log(obj);
+		var ul = $("#shangpin"); //主体元素
+		alert(obj.goodsId);
+		if(obj.goodsId!=null&&obj.goodsId!=""){
+			var ss='<li>'
+					+ '<div class="news-detail cfx">'
+					+ '	<a href="content.html?id='+obj.goodsId+'" target="_blank">'
+					+ '	<span class="news-detail-img"><img src="'+obj.pic+'" width="150" height="150"/></span>'
+					+ '	<h3 style="height:150px;">'+obj.price+'元<br>'
+					+'  原&nbsp;价：'+obj.orgPrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.price+'元</b></font><br>'
+					+'  30天销量：'+obj.salesNum+'件 <br><font style="color:black;font-size:16px;"><b>'+obj.title+'元</b></font><br>'
+					+'  </h3>'
+					+ ' </a>'
+					+ '</div>'
+					+ '</li>';
+		}else{
+			var ss=('<li>'
+					+ '<div class="news-detail cfx">'
+					+ '	<a href="content.html?id='+obj.num_iid+'" target="_blank">'
+					+ '	<span class="news-detail-img"><img src="'+obj.pict_url+'" width="150" height="150"/></span>'
+					+ '	<h3 style="height:150px;">'+obj.title+'元<br>'
+					+'  原&nbsp;价：'+obj.reserve_price+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.zk_finalPrice+'元</b></font><br>'
+					+'  30天销量：'+obj.volume+'件 <br>宝贝所在：'+obj.provcity
+					+'  </h3>'
+					+ ' </a>'
+					+ '</div>'
+					+ '</li>');
+		}
+	   ul.html(ss);
+	}
+	
+	function yhgm(){
+		location.href=buyUrl;
+	}
+	
+	$("#isno").click(function(){
+		var id=location.search.substring(1);
+		alert(id);
+		id=id.replace('goodsId=','');
+		location.href="jzdy3.html?goodsId="+id;
+	});
+</script>
+</html>

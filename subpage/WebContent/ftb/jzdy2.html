@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>精准订阅</title>
+<link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
+<link rel="stylesheet"
+	href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
+<link rel="stylesheet" href="../css/wap/korea.css">
+<link rel="stylesheet"
+	href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
+<style type="text/css">
+.search {
+	border: 1;
+	line-height: 30px;
+	border-radius: 10px;
+	width: 95%;
+	overflow: hidden;
+	outline: none;
+	background: #ffffe9;
+	text-indent: 2em;
+	color: #666;
+}
+
+.yhxx {
+	border: 1px solid rgba(0, 0, 0, .15);
+	margin-top: 5px;
+}
+
+.form-group {
+	margin-bottom: 1rem;
+	padding-right: 20px;
+}
+
+.row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+</style>
+
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0, maximum-scale=1.0">
+<meta content="telephone=no" name="format-detection" />
+</head>
+<body>
+	<div class="news" style="display: block; margin-top: 0em;">
+		<div class="news-fixed">
+			<a href="../index.html" class="fl"></a>
+			<h1>精准订阅</h1>
+		</div>
+			<ul class="news-list">
+				<li>
+					<div class="news-detail " style="height: 365px;">
+						<div class="form-group ">
+							<textarea class="form-control " style="width: 100%;height: 100px;" name="url"
+								placeholder="请输入商品URL或者客户端商品分享链接" id="url" rows="8" ></textarea>
+							<input type="hidden" name="goodsId" value="" id="goodsId" />
+							<input type="hidden" name="content" value="" id="content" />
+						</div>
+						<div id="goumai1" style="display: none;">
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="news-page">
+				<div id="dingyue">
+					<button class="button button-glow button-rounded button-caution "
+						style="width: 40%; margin-left: 2px;" type="button"
+						id="findBtn" >查找商品</button>
+						
+				</div>
+			</div>
+		
+	</div>
+	<br>
+	<footer class="footer">
+		<div class="top">
+			<a href="https://login.taobao.com/">登录</a>| <a
+				href="https://reg.taobao.com/member/reg/fill_mobile.htm">注册</a> <a
+				class="btn" href="#">Top</a>
+		</div>
+		<p>
+			<a href="../index.html">标准版</a> <a class="ok" href="../index.html">触屏版</a>
+		</p>
+		<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
+	</footer>
+</body>
+<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+<script src="../config/config.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
+<script type="text/javascript">
+	var wait = 90;
+	//验证码
+	$(function() {
+		/**
+			验证连接是否为有效连接
+		 */
+		$("#findBtn").click(function() {
+			var url = $("#url").val();
+			if(url.length!=0){
+				var match=/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
+				if(match.test(url)){
+					//是连接
+					checkUrl(url);
+				}else if(url.indexOf("http")>0){
+					//包含连接
+					url=url.substring(url.indexOf("http"),url.length);
+					checkUrl(url);
+				}else{
+					alert("不是正确的链接，请核实！");
+				}
+			}
+		});		
+	})
+	
+	/*
+	 *验证是否存在此商品
+   	 */
+	function goods(id){
+		$.jsonp({
+			url:config_path_JsonP+'/subadmin/f/sub/jzdy/goods?goodsId='+id,
+			callbackParameter : "callback",
+			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+			//jsonpCallback: "receive",//自定
+			timeout : 3000,
+			dataFilter : function(json) {
+				if(json!=null&&json!=""){
+					//如果有商品，将商品json存储到localStorage进行页面之间的传递
+					var storage=window.localStorage;
+					var data=JSON.stringify(json[0]);
+					storage.setItem("data",data);
+					window.location.href="jzdy4.html?goodsId="+id;
+				}else{
+					alert("无此商品的优惠信息，请订阅");
+					window.location.href="jzdy3.html?goodsId="+id;
+				}
+			},
+			success : function(json, textStatus, xOptions) {
+				console.log("jsonp.success:" + json);
+			},
+			error : function(xOptions, textStatus) {
+				console.log("jsonp.error:" + textStatus + ", rel="+ xOptions);
+			}
+		});
+	}
+	
+
+	/*从长连接中截取id*/
+	 function getId(url){
+			var url2 = url.substring(url.indexOf("id"), url.length);
+			var id;
+			if(url2.length>15){
+				 id= url2.substring(3, url2.indexOf("&"));
+			}else{
+				id = url2.substring(3, url2.length);
+			}
+			$("#goodsId").val(id);
+			//验证是否存在此商品的优惠券
+			goods(id);
+	 }
+	/*
+	   区分长短连接，并处理
+	*/
+	function checkUrl(url){
+		if(url.indexOf("id")>0){
+			//是http开始的链接，并且包含有id，为长连接
+			getId(url);
+		}else{
+			//短连接,需要进行转换
+			$.jsonp({
+			url:config_path_JsonP+'/subadmin/f/sub/jzdy/url?url='+url,
+			callbackParameter : "callback",
+			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+			timeout : 3000,
+			dataFilter : function(json) {
+				goods(json);
+				}
+			});
+		}
+	}
+</script>
+</html>
