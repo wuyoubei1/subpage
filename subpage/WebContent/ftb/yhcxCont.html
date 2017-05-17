@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="main-title clearfix">
-    <a href="javascript:window.history.go(-1)" class="main-back"></a>
+    <a href="javascript:wback();" class="main-back"></a>
     <a class="mui-action-menu main-more" href="../index.html" id="mui-action-menu"></a>
 </div>
 <!-- 主界面具体展示内容 -->
@@ -95,7 +95,12 @@
 <script>
 //接收传递的参数
 var href = window.location.href;
-var id=href.split('=')[1];
+console.log("href");
+console.log("href:"+href);
+var id=href.substring(href.indexOf("id=")+3,href.indexOf("&key"));
+console.log("id:"+id);
+var key=href.substring(href.indexOf('key=')+4);
+console.log("key:"+key);
 //alert(id);
 
 $.jsonp({
@@ -289,6 +294,10 @@ function appendUl(obj) {
 		+ '       <span class="sold-num">'+obj.salesNum+'</span>'
 		+ '       <span class="text">人已买</span>'
 		+ '   </div></div></div>');
+}
+/****/
+function wback(){
+	location.href="yhcx.html?key="+key;
 }
 </script>
 

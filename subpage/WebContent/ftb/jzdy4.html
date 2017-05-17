@@ -4,11 +4,9 @@
 <meta charset="utf-8">
 <title>精准订阅</title>
 <link rel="stylesheet" href="../css/wap/index.css" type="text/css" />
-<link rel="stylesheet"
-	href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
+<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/buttons.css" type="text/css" />
 <link rel="stylesheet" href="../css/wap/korea.css">
-<link rel="stylesheet"
-	href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="http://oonojod06.bkt.clouddn.com/bootstrap.css" type="text/css" />
 <style type="text/css">
 .search {
 	border: 1;
@@ -50,7 +48,7 @@
 <body>
 	<div class="news" style="display: block; margin-top: 0em;">
 		<div class="news-fixed">
-			<a href="../index.html" class="fl"></a>
+			<a href="javascript:history.go(-1);" class="fl"></a>
 			<h1>精准订阅</h1>
 		</div>
 		<div id="shangpin"></div>
@@ -77,7 +75,6 @@
 	</footer>
 </body>
 <script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
-<script src="../config/config.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
 <script type="text/javascript">
@@ -85,28 +82,29 @@
 	window.onload = function(){
 		var storage=window.localStorage;
 		var json=storage.getItem("data");
-		alert(json);
+		//alert(json);
 		var jsonObj=JSON.parse(json);
 		appendUl(jsonObj);
 	}
-	
-	
 	
 	var buyUrl='';
 	/*数据展示到页面*/
 	function appendUl(obj){
 		buyUrl=obj.qQuanMLink;
+		if(buyUrl==null){
+			buyUrl=obj.item_url;
+		}
 		console.log(buyUrl);
 		console.log(obj);
 		var ul = $("#shangpin"); //主体元素
-		alert(obj.goodsId);
+		//alert(obj.goodsId);
 		if(obj.goodsId!=null&&obj.goodsId!=""){
 			var ss='<li>'
 					+ '<div class="news-detail cfx">'
-					+ '	<a href="content.html?id='+obj.goodsId+'" target="_blank">'
+					+ '	<a href="#">'
 					+ '	<span class="news-detail-img"><img src="'+obj.pic+'" width="150" height="150"/></span>'
 					+ '	<h3 style="height:150px;">'+obj.price+'元<br>'
-					+'  原&nbsp;价：'+obj.orgPrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.price+'元</b></font><br>'
+					+'  原&nbsp;价：'+obj.orgPrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.zk_final_price+'元</b></font><br>'
 					+'  30天销量：'+obj.salesNum+'件 <br><font style="color:black;font-size:16px;"><b>'+obj.title+'元</b></font><br>'
 					+'  </h3>'
 					+ ' </a>'
@@ -115,10 +113,10 @@
 		}else{
 			var ss=('<li>'
 					+ '<div class="news-detail cfx">'
-					+ '	<a href="content.html?id='+obj.num_iid+'" target="_blank">'
+					+ '	<a href="#" >'
 					+ '	<span class="news-detail-img"><img src="'+obj.pict_url+'" width="150" height="150"/></span>'
 					+ '	<h3 style="height:150px;">'+obj.title+'元<br>'
-					+'  原&nbsp;价：'+obj.reserve_price+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.zk_finalPrice+'元</b></font><br>'
+					+'  原&nbsp;价：'+obj.reserve_price+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.zk_final_price+'元</b></font><br>'
 					+'  30天销量：'+obj.volume+'件 <br>宝贝所在：'+obj.provcity
 					+'  </h3>'
 					+ ' </a>'
@@ -134,7 +132,7 @@
 	
 	$("#isno").click(function(){
 		var id=location.search.substring(1);
-		alert(id);
+		//alert(id);
 		id=id.replace('goodsId=','');
 		location.href="jzdy3.html?goodsId="+id;
 	});

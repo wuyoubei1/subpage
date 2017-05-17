@@ -36,7 +36,7 @@
 	</div>
 <div class="news" style="display: block;margin-top: 0em;">
      <div class="news-fixed">
-         <a href="../index.html" class="fl"></a>
+         <a href="javascript:wback();" class="fl"></a>
          <h1>商品详情</h1>
      </div>
      <div  style="text-align: center;">
@@ -68,7 +68,13 @@
 <script>
 //接收传递的参数
 var href = window.location.href;
-var id=href.split('=')[1];
+console.log(href);
+var id=href.split('=')[1].split('&num')[0];
+console.log(id);
+var num=href.split('=')[2].split('&')[0];
+var key=href.split('=')[3];
+console.log(key);
+console.log(num);
 //alert(id);
 
 $.jsonp({
@@ -169,6 +175,9 @@ function is_weixin() {
     } else {
         return false;
     }
+}
+function wback(){
+	location.href="spsx.html?key="+key+"&num="+num;
 }
 	</script>
 

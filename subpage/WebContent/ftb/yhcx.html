@@ -225,7 +225,7 @@
 		<a href="../index.html" class="main-back"></a>
 		<div class="search fl" style="width: 80%;">
 			<form action="javascript:searchData(1);" method="get">
-				<span class="search-kw" id="tipMsg"></span>
+				<span class="search-kw" id="tipMsg">优惠查询</span>
 				<input type="hidden" name="r" value="index/search" style="width: 80%;">
 				<button class="search_submit search-in background"></button>
 				<input type="text" autocomplete="off" placeholder="关键字" value="" name="key" id="key" onchange="changehKey(this);"
@@ -383,10 +383,10 @@
 					if(json==''){
 						$('#label').html("没有找到商品");
 					}else if(null!=json){
-						console.log("jsonp.filter:" + json);
+						//console.log("jsonp.filter:" + json);
 						for (var i = 1; i < json.length; i++) {
 							//obj=json.get(i);
-							console.log(json);
+							//console.log(json);
 							//console.log(json.results[i]);
 							appendUl(json[i]);//拼接ul
 						}
@@ -408,7 +408,7 @@
 		function appendUl(obj) {
 			var content = $("#content"); //主体元素
 			content.append('<div class="goods-item">'
-				+ '<a href="yhcxCont.html?id='+obj.goodsId+'"  class="img">'
+				+ '<a href="yhcxCont.html?id='+obj.goodsId+'&key='+$('#key').val()+'"  class="img">'
 				+ '<span class="coupon-wrapper">'
 				+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
 				+ '<span class="price">'+obj.quanPrice+'元</span>'

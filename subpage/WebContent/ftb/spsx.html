@@ -77,9 +77,19 @@
 <script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
 <script>
 	var q = window.location.href;
+	console.log(q);
 	q=q.split('=')[1];
+	if(q!=null){
+		q=q.split('&num')[0];
+	}
 	q=decodeURIComponent(q);
-	//alert(q);
+	console.log(q);
+	var num=window.location.href.split('&num=')[1];
+	console.log("num");
+	console.log(num);
+	if(num==undefined){
+		num=1;
+	}
 	var defaultV="输入关键词搜索";
 	if(q!='undefined'&&q!=defaultV){
 		$('#key').val(q);
@@ -116,14 +126,14 @@
 		    y.remove()
 		    //console.log('2222:'+y.remove());
 		});
-		searchData(1);
+		searchData(num);
 	}
-	
 	function searchData(pageNo){
+		num=pageNo;
 		var obj=null;
 		//alert("优惠方式："+t);
 		$.jsonp({
-			url:'http://localhost:8080/subadmin/f/sub/pTb/spsx',
+			url:config_path_JsonP+'/subadmin/f/sub/pTb/spsx',
 			data:{'pageNo':pageNo,'q':$('#key').val(),
             	'fields':'title,pict_url,reserve_price,zk_final_price,provcity,item_url,volume,num_iid',
             	'sort':'total_sales_des'},
@@ -132,10 +142,10 @@
             //jsonpCallback: "receive",//自定
             timeout:3000,
             dataFilter:function(json){
-            	console.log("jsonp.filter:"+json.results.length);
+            	//console.log("jsonp.filter:"+json.results.length);
                 for(var i=1;i<json.results.length;i++){
                 	//obj=json.get(i);
-                	console.log(json.results[i]);
+                	//console.log(json.results[i]);
                 	appendUl(json.results[i]);//拼接ul
                 }
             },
@@ -153,7 +163,7 @@
 		var ul = $("#content"); //主体元素
 		ul.append('<li>'
 				+ '<div class="news-detail cfx">'
-				+ '	<a href="content.html?id='+obj.numIid+'" target="_blank">'
+				+ '	<a href="content.html?id='+obj.numIid+'&num='+(num-1)+'&key='+$('#key').val()+'">'
 				+ '	<span class="news-detail-img"><img src="'+obj.pictUrl+'" width="150" height="150"/></span>'
 				+ '	<h3 style="height:150px;">'+obj.title+'元<br>'
 				+'  原&nbsp;价：'+obj.reservePrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.zkFinalPrice+'元</b></font><br>'
@@ -166,12 +176,13 @@
 	//alert(config_path_JsonP);
 </script>
 <script type="text/javascript">
+    //num = 2;
 	$(document).ready(
 		function() {
 			var range = 50; //距下边界长度/单位px
 			var elemt = 500; //插入元素高度/单位px
 			var maxnum = 200; //设置加载最多次数
-			var num = 2;
+			
 			var totalheight = 0;
 			$(window).scroll(
 				function() {
@@ -184,8 +195,9 @@
 					totalheight = parseFloat($(window).height())+ parseFloat(srollPos);
 					if (($(document).height() - range) <= totalheight&& num != maxnum) {
 						//alert("调用ajax加载新内容 追加到页面底部");
-						searchData(num);
 						num++;
+						searchData(num);
+						console.log(num);
 					}
 				});
 		}
