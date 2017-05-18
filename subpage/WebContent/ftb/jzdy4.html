@@ -77,6 +77,7 @@
 <script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
+<script src="../config/config.js"></script>
 <script type="text/javascript">
 
 	window.onload = function(){
@@ -103,9 +104,9 @@
 					+ '<div class="news-detail cfx">'
 					+ '	<a href="#">'
 					+ '	<span class="news-detail-img"><img src="'+obj.pic+'" width="150" height="150"/></span>'
-					+ '	<h3 style="height:150px;">'+obj.price+'元<br>'
-					+'  原&nbsp;价：'+obj.orgPrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.zk_final_price+'元</b></font><br>'
-					+'  30天销量：'+obj.salesNum+'件 <br><font style="color:black;font-size:16px;"><b>'+obj.title+'元</b></font><br>'
+					+ '	<h3 style="height:150px;">'+obj.title+'元<br>'
+					+'  原&nbsp;价：'+obj.orgPrice+'<br><font style="color:black;font-size:16px;"><b>券金额：'+obj.quanPrice+'元</b></font><br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.price+'元</b></font><br>'
+					+'  30天销量：'+obj.salesNum+'件 <br>'
 					+'  </h3>'
 					+ ' </a>'
 					+ '</div>'
