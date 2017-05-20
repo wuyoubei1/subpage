@@ -18,7 +18,7 @@ body{padding-top:50px;}
 /*顶部导航菜单end*/
 
 /*首页导航start*/
-.nav {border-bottom:1px solid #eeeeee;padding: 10px 0 20px 0;}
+.nav {border-bottom:1px solid #eeeeee;padding: 10px 0 10px 0;}
 .nav a{width: 25%;display: inline-block;text-align: center;}
 .nav a img{width: 40px;height: 40px;background: url(icon.png);}
 .nav a span{display: block;color: #666666;font-size: 14px;}
@@ -27,9 +27,9 @@ body{padding-top:50px;}
 .nav a.nav3 img{background-position: -122px -46px;}
 .nav a.nav4 img{background-position: -181px -46px;}
 
-.menu {-webkit-column-gap: 0px;-moz-column-gap: 0px;column-gap: 0px;-webkit-column-count: 4;-moz-column-count: 4;column-count: 4;text-align: center;border-bottom: 1px solid #eeeeee;padding: 0 0 14px 0;}
+.menu {-webkit-column-gap: 0px;-moz-column-gap: 0px;column-gap: 0px;-webkit-column-count: 4;-moz-column-count: 4;column-count: 4;text-align: center;border-bottom: 1px solid #eeeeee;padding: 0 0 8px 0;}
 .menu .ok a{border: 1px solid #f97d0e;background: #fff3e9;}
-.menu a{border: 1px solid #e2e2e2;line-height: 27px;width:50px;text-align:center;height: 27px;display: inline-block;padding: 0 10px 0 10px;border-radius: 27px;margin: 14px 0 0 0;color: #666666;}
+.menu a{border: 1px solid #e2e2e2;line-height: 27px;width:50px;text-align:center;height: 27px;display: inline-block;padding: 0 10px 0 10px;border-radius: 27px;margin: 10px 0 0 0;color: #666666;}
 
 .content .tit{background: #fafafa;border-bottom: 1px solid #eeeff0;height: 41px;line-height: 41px;font-size: 20px;font-weight: normal;}
 .content .tit img{width: 27px;width: 27px;vertical-align: middle;margin: -4px 5px 0 5px;background:url(icon.png);}
@@ -39,8 +39,8 @@ body{padding-top:50px;}
 .content .tit .icHot{background-position:-110px -8px;}
 
 .content .sec a{display: inline-block;border:solid #eeeff0;border-width: 0px 1px 1px 0;float: left;width: 100%;}
-.content .sec img{width: 100%;display: block;}
-.content .conBuy{-webkit-column-gap: 0px;-moz-column-gap: 0px;column-gap: 0px;-webkit-column-count: 2;-moz-column-count: 2;column-count: 2;}
+.content .sec img{width: 100%;}
+.content .conBuy{-webkit-column-gap: 10px;-moz-column-gap: 0px;column-gap: 0px;-webkit-column-count: 2;-moz-column-count: 2;column-count: 2;}
 .content .conBuy a:nth-child(3){border-left: 1px solid #eeeff0;}
 .content .conSale a{display: inline-block;width: 50%;border: 0;}
 .content .conSale a img{width: 100%;border: 1px solid #eeeff0;border-width: 0 0 1px 0;}

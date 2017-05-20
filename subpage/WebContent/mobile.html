@@ -5,8 +5,220 @@
 <title>hui购-优惠购物私人定制</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0, maximum-scale=1.0">
 <meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" href="css/wap_common.css" type="text/css" />
+<link rel="stylesheet" href="css/dtk/wapindex.css" type="text/css" />
 <link rel="stylesheet" href="css/wap/index.css" type="text/css" />
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/dtk/swiper.min.css" type="text/css" />
+<link rel="stylesheet" href="css/dtk/wapindex.css" type="text/css" />
+<style type="text/css">
+.order-nav {
+	height: 50px;
+	margin-top: 44px;
+	background: white;
+	margin-bottom: 10px;
+}
+
+.order-nav ul li {
+	box-sizing: border-box;
+	float: left;
+	width: 25%;
+	text-align: center;
+	line-height: 50px;
+	height: 50px;
+}
+
+.order-nav ul li a {
+	color: #333;
+	font-size: 15px;
+}
+
+.order-nav ul li.cur {
+	border-bottom: 1px solid #fe4a65;
+}
+
+.order-nav ul li.cur a {
+	color: #fe4a65;
+}
+
+.goto-div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: none;
+	border-bottom: 1px solid #EEE;
+	border-radius: 1px 1px 0 0;
+	background-color: #F8F8F8;
+	overflow: hidden;
+}
+
+.goto-btn {
+	display: block;
+	width: 64px;
+	height: 15px;
+	line-height: 15px;
+	margin: 6px auto;
+	text-align: center;
+	background-color: #FF6C00;
+	font-size: 12px;
+	color: #FFF;
+}
+
+.layui-layer-iframe {
+	margin-top: -12px !important;
+}
+
+.layui-layer-iframe .layui-layer-content {
+	padding-top: 17px !important;
+	overflow: visible !important;
+	background-color: #F8F8F8 !important;
+}
+
+.layui-layer-iframe .mask-tips {
+	position: relative;
+	width: 80% !important;
+	height: auto;
+	background-color: rgba(255, 102, 0, 0.7) !important;
+	background-size: 100%;
+	border-radius: 10px !important;
+}
+
+.layui-layer-iframe .mask-tips img.wechat-bg {
+	width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+.layui-layer-iframe .mask-tips img.wechat-arrow {
+	position: absolute;
+	top: -63px;
+	right: -10%;
+}
+
+.layui-layer-iframe .mask-tips .layui-layer-content {
+	overflow: visible !important;
+}
+
+.main-title .main-back {
+	position: initial;
+}
+
+.search-none {
+	width: 100%;
+	height: 200px;
+	margin: 5rem auto;
+	display: block;
+}
+
+.search-none .search-none-icon {
+	width: 150px;
+	height: 150px;
+	background: url(../images/search-none2s.png) center no-repeat;
+	background-size: 100%;
+	margin: 0 auto 25px;
+}
+
+.search-none p {
+	text-align: center;
+	font-size: 15px;
+	color: #aaa;
+	line-height: 24px;
+}
+
+.search-cat {
+	position: fixed;
+	top: 46px;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	padding-bottom: 11px;
+}
+
+.search-cat .search-cat-tit {
+	position: relative;
+	border-bottom: #898989 1px solid;
+	width: 150px;
+	height: 10px;
+	margin: 10px auto;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.search-cat .search-cat-tit .up-menu {
+	display: block;
+	width: 70px;
+	margin: 0 auto;
+	height: 20px;
+	background-color: #faf5f6;
+	line-height: 20px;
+	font-size: 13px;
+	color: #333;
+}
+
+.search-cat .menu-content {
+	width: 100%;
+	z-index: 2;
+	background: white;
+}
+
+.search-cat .menu-content .main-cat {
+	overflow: hidden;
+}
+
+.search-cat .menu-content .main-cat li {
+	box-sizing: border-box;
+	float: left;
+	width: 25%;
+	height: 51px;
+	border-bottom: #eee 1px solid;
+	border-right: #eee 1px solid;
+	text-align: center;
+	line-height: 51px;
+}
+
+.search-cat .menu-content .main-cat li a {
+	display: block;
+	color: #333;
+	font-size: 14px;
+}
+
+.search-cat .menu-content .main-cat li:nth-child(4n) {
+	border-right: none;
+}
+
+.search-cat .menu-content .up-menu {
+	display: block;
+	width: 60px;
+	height: 13px;
+	border-radius: 1px;
+	border: #ff7f90 1px solid;
+	text-align: center;
+	color: #ff7f90;
+	line-height: 12px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.nominate {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	padding-top: 10px;
+	clear: both;
+}
+
+.nominate p {
+	color: #aaa;
+	font: 13px "Simsun";
+}
+
+.nominate h2 {
+	color: #fe4a65;
+	font: 15px "Simsun";
+	padding: 0;
+	margin: 4px 0 16px;
+}
+</style>
 </head>
 <body>
 <header>
@@ -59,101 +271,13 @@
 		<h3 class="tit" id="qgsp">
 			<img class="icBuy" src="http://oonojod06.bkt.clouddn.com/qg.png" alt=""	style="background: none;" />抢购
 		</h3>
-		<div class="conBuy sec">
-			<a href="ftb/t_hanyu.html"> <img alt="" src="http://img3.tbcdn.cn/tfscom/i1/TB1Xe.UQpXXXXcTaXXXXXXXXXXX_!!0-item_pic.jpg"></a>
-			<a href="ftb/t_shishang.html"> <img alt="" src="http://img1.tbcdn.cn/tfscom/i3/TB17nCHQpXXXXcKXpXXXXXXXXXX_!!0-item_pic.jpg"></a>
-			<div class="cl"></div>
-		</div>
+		<div class="conBuy sec" id="qg" ></div>
 		<h3 class="tit">
-			<img class="icBuy" src="images/blank.gif" alt="" />值得买
+			<img class="icBuy" src="images/blank.gif" alt="" />优惠券商品
 		</h3>
-		<div class="conSale sec">
-			<!-- 发现实惠 -->
-			<a href="ftb/t_fxsh.html" >
-				<img src="http://wx3.sinaimg.cn/mw690/47a14fc7ly1fesueiu1z2j20a004zjsn.jpg" alt="" />
-			</a>
-			<!-- 探索新奇 -->
-			<a href="ftb/t_tsxq.html"><img src="http://wx1.sinaimg.cn/mw690/47a14fc7ly1fesuej50ylj20a004ydgv.jpg" alt="" /></a>
-			<!-- <a href="#3"><img src="images/li3.jpg" alt="" /></a> -->
-			<div class="cl"></div>
-		</div>
+		<div class="goods-list" data-page="2" id="yhq"></div>
 
-		<h3 class="tit">
-			<img class="icSale" src="images/blank.gif" alt="" />淘特价
-		</h3>
-		<div class="conSale sec">
-			<!-- 19.9封顶 -->
-			<a href="ftb/yhcx.html"><img
-				src="http://wx2.sinaimg.cn/mw690/47a14fc7ly1fesueji85tj20a007975b.jpg" alt="19.9封顶" /></a>
-			<!-- 全网1折 -->
-			<a href="ftb/yhcx.html"><img
-				src="http://wx1.sinaimg.cn/mw690/47a14fc7ly1fesuejt3y5j20a0079gmi.jpg" alt="全网1折" /></a>
-			<!-- 超级降价 -->
-			<a href="ftb/yhcx.html"><img
-				src="http://wx2.sinaimg.cn/mw690/47a14fc7ly1fesuel1kwsj20a007rwt9.jpg" alt="超级降价" /></a>
-			<!-- 明日特价 -->
-			<a href="ftb/yhcx.html"><img
-				src="http://wx1.sinaimg.cn/mw690/47a14fc7ly1fesuekmfrqj209z07r4d6.jpg" alt="明日特价" /></a>
-			<div class="cl"></div>
-		</div>
 
-		<h3 class="tit">
-			<img class="icHot" src="images/blank.gif" alt="" />热门主题
-		</h3>
-		<div class="icHot sec">
-			<ul>
-				<li><a href="ftb/yhcx.html">
-						<img src="http://wx1.sinaimg.cn/mw690/47a14fc7ly1fesuiy6125j20c20c2adm.jpg" alt="" />
-						<h4>男鞋</h4>
-						<p>走出自己的风格</p>
-				</a></li>
-
-				<li><a href="ftb/yhcx.html">
-						<img src="http://wx3.sinaimg.cn/mw690/47a14fc7ly1fesuix8smcj203h03hdg4.jpg" alt="" />
-						<h4>男装</h4>
-						<p>不一样的男人气质</p>
-				</a></li>
-
-				<li><a href="ftb/t_bjbdn.html">
-						<img src="http://wx4.sinaimg.cn/mw690/47a14fc7ly1fesuixi8mkj203b03b74k.jpg" alt="" />
-						<h4>数码广场</h4>
-						<p>玩转3C产品</p>
-				</a></li>
-
-				<li><a href="ftb/yhcx.html">
-						<img src="http://wx1.sinaimg.cn/mw690/47a14fc7ly1fesuiwobq6j203h03h0t0.jpg" alt="" />
-						<h4>女装</h4>
-						<p>女人的衣服总是少了那么一件</p>
-				</a></li>
-
-				<li><a href="ftb/yhcx.html">
-						<img src="http://wx3.sinaimg.cn/mw690/47a14fc7ly1fesuiwag4gj20bd0bdjv3.jpg" alt="" />
-						<h4>女鞋</h4>
-						<p>带你走在时尚的前端</p>
-				</a></li>
-
-				<li><a href="ftb/yhcx.html"
-					onclick="_gaq.push([ '_trackEvent', 'm.b5m.com', 'clicked', '热门主题' ]);">
-						<img src="http://wx4.sinaimg.cn/mw690/47a14fc7ly1fesuivjc1bj203h03h0te.jpg" alt="" />
-						<h4>家居</h4>
-						<p>乐享生活</p>
-				</a></li>
-
-				<li><a href="ftb/t_lingshi.html">
-						<img src="http://wx1.sinaimg.cn/mw690/47a14fc7ly1fesuixuzefj203h03h3yv.jpg" alt="" />
-						<h4>美食城</h4>
-						<p>天下美食大搜罗</p>
-				</a></li>
-
-				<li><a href="ftb/yhcx.html">
-						<img src="http://wx4.sinaimg.cn/mw690/47a14fc7ly1fesuivv8wwj207y07y76c.jpg" alt="" />
-						<h4>美妆</h4>
-						<p>与美丽有个秘密约会</p>
-				</a></li>
-
-			</ul>
-			<div class="cl"></div>
-		</div>
 	</div>
 <footer class="footer">
 	<div class="top">
@@ -166,12 +290,116 @@
 	</p>
 	<p>Copyright&nbsp;&nbsp;&nbsp;2017-2018 WWW.QUANGOU365.COM 版权所有</p>
 </footer>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
+<script src="config/config.js"></script>
 <script type="text/javascript">
 	$('#qgsp').click(function(){
 	    document.location.href="ftb/qg.html";
 	});
 
+	var obj=null;
+	//alert("优惠方式："+t);
+	$.jsonp({
+		url:config_path_JsonP+'/subadmin/f/sub/tqg/data',
+		data:{'page':1,'key':$('#key').val(),'pageSize':7},
+           callbackParameter:"callback",
+           jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+           //jsonpCallback: "receive",//自定
+           timeout:3000,
+           dataFilter:function(json){
+           	console.log(json);
+           	//console.log(json.length);
+               for(var i=1;i<json.length;i++){
+               	//obj=json.get(i);
+               	//console.log(json[i]);
+               	appendUl(json[i]);//拼接ul
+               }
+           },
+           success:function(json,textStatus,xOptions){
+               console.log("jsonp.success:"+json);
+           },
+           error:function(xOptions,textStatus){
+               console.log("jsonp.error:"+textStatus+", rel="+xOptions);
+               console.log(xOptions);
+           }
+       });
+	function appendUl(obj){
+		buyUrl=obj.qQuanMLink;
+		//console.log(buyUrl);
+		//console.log(obj);
+		var ul = $("#qg"); //主体元素
+		var ss='	<a href="qgCont.html?id='+obj.numiid+'">'
+				+ '	<img src="'+obj.picUrl+'"/>'
+				+' <span style="color:#777777;">折扣价:'+obj.zkFinalPrice+'元 &nbsp;&nbsp;&nbsp;原:'+obj.reservePrice+'<br>'
+				+' '+obj.title+'</span>'
+				+ ' </a>';
+	   ul.append(ss);
+	}
+	
+	
+	/******优惠信息*****/
+	var obj = null;
+	//alert("优惠方式："+pageNo+$('#key').val());
+	$.jsonp({
+		url : config_path_JsonP+'/subadmin/f/sub/yhcx/data',
+		data : {
+			'page' : 1,'pageSize':7,
+			'key':''
+			//'fields' : 'title,pict_url,reserve_price,zk_final_price,provcity,item_url,volume,num_iid',
+			//'sort' : 'total_sales_des'
+		},
+		callbackParameter : "callback",
+		jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+		//jsonpCallback: "receive",//自定
+		timeout : 3000,
+		dataFilter : function(json) {
+			//alert("ddddd"+json);
+			if(json==''){
+				$('#label').html("没有找到商品");
+			}else if(null!=json){
+				//console.log("jsonp.filter:" + json);
+				for (var i = 1; i < json.length; i++) {
+					//obj=json.get(i);
+					console.log("优惠券");
+					console.log(json);
+					//console.log(json.results[i]);
+					appendUlYhq(json[i]);//拼接ul
+				}
+			}else if($('#key').val() == ''||$('#key').val() == '输入关键词搜索'){
+				$('#label').html("请输入关键字搜索");
+			}else {
+				$('#label').html("没有商品了");
+			}
+		},
+		success : function(json, textStatus, xOptions) {
+			console.log("jsonp.success:" + json);
+		},
+		error : function(xOptions, textStatus) {
+			console.log("jsonp.error:" + textStatus + ", rel="+ xOptions);
+		}
+	});
 
+	function appendUlYhq(obj) {
+		var content = $("#yhq"); //主体元素
+		content.append('<div class="goods-item">'
+			+ '<a href="yhcxCont.html?id='+obj.goodsId+'"  class="img">'
+			+ '<span class="coupon-wrapper">'
+			+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
+			+ '<span class="price">'+obj.quanPrice+'元</span>'
+			+ ' </span>'
+			+ ' <img src="'+obj.pic+'" alt="">'
+			+ '</a>'
+			+ '<a href="yhcxCont.html?id='+obj.numIid+'"  class="title">'
+			+ '    <div class="text" style=" color:#777777;">'+obj.title+'</div>'
+			+ '</a>' + '<div class="price-wrapper">'
+			+ '    <span class="text">券后</span>'
+			+ '    <span class="price">￥'+obj.price+'</span>'
+			+ '   <div class="sold-wrapper">'
+			+ '       <span class="sold-num">'+obj.salesNum+'</span>'
+			+ '       <span class="text">人已买</span>'
+			+ '   </div></div></div>');
+	}
 </script>
 
 </body>
