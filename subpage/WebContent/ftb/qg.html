@@ -41,7 +41,7 @@
 					<table style="width: 100%" border="0">
 						<tr>
 							<td style="width: 70%">
-								<input class="form-control" type="text" name="key" id="key" value=""
+								<input class="form-control" type="text" name="key" id="key" value="" placeholder="请输入商品名称"
 								style="width: 93%" onchange="changehKey(this);" onclick="reset(this);" onkeydown="ctype();" />
 							</td>
 							<td>
@@ -73,13 +73,13 @@
 	</footer>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
-<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+<script src="../config/config.js"></script>
 <script>
 	var q = window.location.href;
 	q=q.split('=')[1];
 	q=decodeURIComponent(q);
 	//alert(q);
-	var defaultV="输入关键词搜索";
+	var defaultV="";
 	if(q!='undefined'&&q!=defaultV){
 		$('#key').val(q);
 		search();
@@ -162,6 +162,8 @@
 				+ '</div>'
 				+ '</li>');
 	}
+	//默认首次进入
+	searchData(1);
 	//alert(config_path_JsonP);
 </script>
 <script type="text/javascript">
