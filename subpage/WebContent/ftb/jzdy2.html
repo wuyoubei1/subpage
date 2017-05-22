@@ -122,17 +122,25 @@
 	 *验证是否存在此商品
    	 */
 	function goods(id){
+		var url=$('#url').val();
+		var str=url.substring(url.indexOf("【"),url.indexOf("】")+1);
 		$.jsonp({
-			url:config_path_JsonP+'/subadmin/f/sub/jzdy/goods?goodsId='+id,
+			url:config_path_JsonP+'/subadmin/f/sub/jzdy/goods',
 			callbackParameter : "callback",
 			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
 			//jsonpCallback: "receive",//自定
+			data: {
+				'goodsId' : id,
+				'str' :str
+			},
 			timeout : 3000,
 			dataFilter : function(json) {
+				alert(json[0].goodsId);
 				if((json[0].goodsId!=null&&json[0].goodsId!="")||(json[0].num_iid!=null&&json[0].num_iid!="")){
 					//如果有商品，将商品json存储到localStorage进行页面之间的传递
 					var storage=window.localStorage;
-					var data=JSON.stringify(json[0]);
+					var data=JSON.stringify(json);
+					storage.removeItem("data");
 					storage.setItem("data",data);
 					window.location.href="jzdy4.html?goodsId="+id;
 				}else{
@@ -173,15 +181,60 @@
 		}else{
 			//短连接,需要进行转换
 			$.jsonp({
-			url:config_path_JsonP+'/subadmin/f/sub/jzdy/url?url='+url,
+			url:config_path_JsonP+'/subadmin/f/sub/jzdy/url',
 			callbackParameter : "callback",
 			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+			data:{
+				'url':url
+			},
 			timeout : 3000,
 			dataFilter : function(json) {
 				goods(json);
 				}
 			});
 		}
+	}
+	
+	function tuijian(){
+		var url=$('#url').val();
+		var str=url.substring(url.indexOf("【"),url.indexOf("】")+1);
+		alert(str);
+		var storage=window.localStorage;
+		storage.removeItem("data");
+		if(str!=""&&str.length>0){
+			$.jsonp({
+				url:config_path_JsonP+'subadmin/f/sub/jzdy/tuijian?str='+str,
+				callbackParameter:"callback",
+				jsonp:"callback",
+				timeout:3000,
+				dataFilter: function(json){
+					alert(json[0]);
+					var data=JSON.stringify(json);
+					storage.setItem("data",data);
+				}
+			});
+		}
+	}
+	
+	function appendUl(obj) {
+		var content = $("#content"); //主体元素
+		content.append('<div class="goods-item">'
+			+ '<a href="yhcxCont.html?id='+obj.goodsId+'&key='+$('#key').val()+'"  class="img">'
+			+ '<span class="coupon-wrapper">'
+			+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
+			+ '<span class="price">'+obj.quanPrice+'元</span>'
+			+ ' </span>'
+			+ ' <img src="'+obj.pic+'" alt="">'
+			+ '</a>'
+			+ '<a href="yhcxCont.html?id='+obj.numIid+'" target="_blank" class="title">'
+			+ '    <div class="text" style=" color:#777777;">'+obj.title+'</div>'
+			+ '</a>' + '<div class="price-wrapper">'
+			+ '    <span class="text">券后</span>'
+			+ '    <span class="price">￥'+obj.price+'</span>'
+			+ '   <div class="sold-wrapper">'
+			+ '       <span class="sold-num">'+obj.salesNum+'</span>'
+			+ '       <span class="text">人已买</span>'
+			+ '   </div></div></div>');
 	}
 </script>
 </html>

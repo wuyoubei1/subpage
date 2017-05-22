@@ -51,8 +51,9 @@
 			<a href="javascript:history.go(-1);" class="fl"></a>
 			<h1>精准订阅</h1>
 		</div>
-		<div id="shangpin"></div>
-		<div id="goumai">
+		<span id="message" style="font: smaller;size: 16;color: red;"></span>
+		<div id="shangpin" class="goods-list" data-page="2"></div>
+		<div id="goumai" style="position:fixed; bottom:0; width: 100%" align="center">
 			<input class="button button-glow button-rounded button-caution "
 				style="width: 40%; margin-left: 5%;" type="button" onclick="yhgm()"
 				value="购买" id="buy"> 
@@ -82,9 +83,19 @@
 	window.onload = function(){
 		var storage=window.localStorage;
 		var json=storage.getItem("data");
-		//alert(json);
 		var jsonObj=JSON.parse(json);
-		appendUl(jsonObj);
+		alert(jsonObj.length);
+		if(jsonObj!=null){
+			if(jsonObj.length>1){//推送数据
+				$('#buy').disabled=true;
+				$('#message').html("没有找到此宝贝的优惠，试试订阅吧");
+				for(var i=0;i<jsonObj.length;i++){
+					appendUl2(jsonObj[i]);
+				}
+			}else{
+				appendUl(jsonObj[0]);
+			}
+		}
 	}
 	
 	var buyUrl='';
@@ -136,5 +147,26 @@
 		id=id.replace('goodsId=','');
 		location.href="jzdy3.html?goodsId="+id;
 	});
+	
+	function appendUl2(obj) {
+		var content = $("#shangpin"); //主体元素
+		content.append('<div class="goods-item">'
+			+ '<a href="yhcxCont.html?id='+obj.goodsId+'"  class="img">'
+			+ '<span class="coupon-wrapper">'
+			+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
+			+ '<span class="price">'+obj.quanPrice+'元</span>'
+			+ ' </span>'
+			+ ' <img src="'+obj.pic+'" alt="" style="width: 100%; height: 100%;">'
+			+ '</a>'
+			+ '<a href="yhcxCont.html?id='+obj.numIid+'" target="_blank" class="title">'
+			+ '    <div class="text" style=" color:#777777;">'+obj.title+'</div>'
+			+ '</a>' + '<div class="price-wrapper">'
+			+ '    <span class="text">券后</span>'
+			+ '    <span class="price">￥'+obj.price.toFixed(2)+'</span>'
+			+ '   <div class="sold-wrapper">'
+			+ '       <span class="sold-num">'+obj.salesNum+'</span>'
+			+ '       <span class="text">人已买</span>'
+			+ '   </div></div></div>');
+	}
 </script>
 </html>
