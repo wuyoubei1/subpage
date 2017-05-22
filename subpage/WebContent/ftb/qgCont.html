@@ -78,7 +78,7 @@
 <div style="display: none;"></div>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
-<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+<script src="../config/config.js"></script>
 
 <!-- 商品详情 -->
 <script>
@@ -86,6 +86,8 @@
 var href = window.location.href;
 var str=href.split('=')[1];
 var id=str.split('&')[0];
+console.log("id");
+console.log(id);
 var key=href.split('=')[2];
 key=decodeURIComponent(key);
 //alert(key);
