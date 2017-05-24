@@ -51,16 +51,16 @@
 			<a href="javascript:history.go(-1);" class="fl"></a>
 			<h1>精准订阅</h1>
 		</div>
-		<span id="message" style="font: smaller;size: 16;color: red;"></span>
+		<span id="message" style="font: smaller;size: 18px;color: red;"></span>
 		<div id="shangpin" class="goods-list" data-page="2"></div>
-		<div id="goumai" style="position:fixed; bottom:0; width: 100%" align="center">
+		<!--div id="goumai" style="position:fixed; bottom:0; width: 100%" align="center">
 			<input class="button button-glow button-rounded button-caution "
 				style="width: 40%; margin-left: 5%;" type="button" onclick="yhgm()"
 				value="购买" id="buy"> 
 				<input class="button button-glow button-rounded button-caution "
 				style="width: 40%; margin-left: 5%;" type="button" value="订阅"
 				id="isno">
-		</div>
+		</div-->
 	</div>
 	<br>
 	<footer class="footer">
@@ -84,11 +84,11 @@
 		var storage=window.localStorage;
 		var json=storage.getItem("data");
 		var jsonObj=JSON.parse(json);
-		alert(jsonObj.length);
+		//alert(jsonObj.length);
 		if(jsonObj!=null){
 			if(jsonObj.length>1){//推送数据
 				$('#buy').disabled=true;
-				$('#message').html("没有找到此宝贝的优惠，试试订阅吧");
+				$('#message').html("没有找到此宝贝的优惠，为您推荐以下商品");
 				for(var i=0;i<jsonObj.length;i++){
 					appendUl2(jsonObj[i]);
 				}
@@ -149,9 +149,10 @@
 	});
 	
 	function appendUl2(obj) {
+		console.log(obj);
 		var content = $("#shangpin"); //主体元素
 		content.append('<div class="goods-item">'
-			+ '<a href="yhcxCont.html?id='+obj.goodsId+'"  class="img">'
+			+ '<a href="jzdy/content.html?id='+obj.goodsId+'"  class="img">'
 			+ '<span class="coupon-wrapper">'
 			+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
 			+ '<span class="price">'+obj.quanPrice+'元</span>'

@@ -124,18 +124,20 @@
 	function goods(id){
 		var url=$('#url').val();
 		var str=url.substring(url.indexOf("【"),url.indexOf("】")+1);
+		console.log("搜索内容");
+		console.log(str);
 		$.jsonp({
 			url:config_path_JsonP+'/subadmin/f/sub/jzdy/goods',
-			callbackParameter : "callback",
-			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-			//jsonpCallback: "receive",//自定
 			data: {
 				'goodsId' : id,
 				'str' :str
 			},
+			callbackParameter : "callback",
+			jsonp : "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+			//jsonpCallback: "receive",//自定
 			timeout : 3000,
 			dataFilter : function(json) {
-				alert(json[0].goodsId);
+				//alert(json[0].goodsId);
 				if((json[0].goodsId!=null&&json[0].goodsId!="")||(json[0].num_iid!=null&&json[0].num_iid!="")){
 					//如果有商品，将商品json存储到localStorage进行页面之间的传递
 					var storage=window.localStorage;
@@ -198,7 +200,7 @@
 	function tuijian(){
 		var url=$('#url').val();
 		var str=url.substring(url.indexOf("【"),url.indexOf("】")+1);
-		alert(str);
+		//alert(str);
 		var storage=window.localStorage;
 		storage.removeItem("data");
 		if(str!=""&&str.length>0){
