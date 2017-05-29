@@ -69,12 +69,14 @@
 //接收传递的参数
 var href = window.location.href;
 console.log(href);
-var id=href.split('=')[1].split('&num')[0];
+var id=href.substring(href.indexOf("id=")+3,href.indexOf("&key"));
 console.log(id);
 var num=href.split('=')[2].split('&')[0];
-var key=href.split('=')[3];
-console.log(key);
+var key=href.substring(href.indexOf("&key=")+5,href.indexOf("&s"));
+console.log("key:"+key);
 console.log(num);
+var s=href.substring(href.indexOf('&s=')+3);
+console.log("s="+s);
 //alert(id);
 
 $.jsonp({
@@ -177,7 +179,7 @@ function is_weixin() {
     }
 }
 function wback(){
-	location.href="spsx.html?key="+key+"&num="+num;
+	location.href="spsx.html?key="+key+"&s="+s;
 }
 	</script>
 

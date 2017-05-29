@@ -102,7 +102,6 @@ console.log("id:"+id);
 var key=href.substring(href.indexOf('key=')+4);
 console.log("key:"+key);
 //alert(id);
-
 $.jsonp({
 	url : config_path_JsonP+'/subadmin/f/sub/yhcx/data',
     data:{'key':id,'page':1},
@@ -111,7 +110,7 @@ $.jsonp({
     //jsonpCallback: "receive",//自定
     timeout:3000,
     dataFilter:function(json){
-        console.log("jsonp.filter:"+json[0]);
+        console.log(json[0]);
         for(var i=0;i<json.length;i++){
         	//obj=json.get(i);
         	console.log('图片URL:'+json[0].pic);
@@ -133,7 +132,10 @@ $.jsonp({
         	}
         	
         	$('#buyquan').attr('biz-itemid',json[0].goodsId);
-        	$('#buyquan').attr('to',json[0].qQuanMLink);
+        	$('#buyquan').attr('to',json[0].quanLink);
+        	if(json[0].qQuanMLink==null){
+        		$('#buyquan').attr('to',json[0].quanLink);
+        	}
         }
     },
     success:function(json,textStatus,xOptions){
@@ -210,11 +212,14 @@ function buylink(){
 }
 /**领券购买**/
 function buyquan(){
+	//alert($('#buyquan').attr('to'));
 	var isWeixin = is_weixin();
 	if(isWeixin){
 		$(".weixin-tip").css("height",winHeight);
         $(".weixin-tip").show();
 	}else{
+		//alert($('#buyquan').attr('to'));
+		console.log($('#buyquan').attr('to'));
 		document.location.href=$('#buyquan').attr('to');
 	}
 }

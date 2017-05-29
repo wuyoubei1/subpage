@@ -58,7 +58,7 @@
 		</ul>
 	</div>
 	<br>
-	<footer class="footer">
+	<footer class="footer" id="footer">
 		<div class="top">
 			<a href="../../../login.html"
 				onclick="_gaq.push([ '_trackEvent', 'm.b5m.com', 'clicked', '登录' ]);">登录</a>|<a
@@ -74,19 +74,29 @@
 	</footer>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
-<script src="http://oonojod06.bkt.clouddn.com/config2.js"></script>
+<script src="../config/config.js"></script>
 <script>
-	var q = window.location.href;
-	console.log(q);
-	q=q.split('=')[1];
-	if(q!=null){
-		q=q.split('&num')[0];
+    var href = window.location.href;
+    console.log(href);
+	var q = "输入关键词搜索";
+	var num=1;
+	var s=0;
+	
+	if(href.indexOf("key=")>0){
+		q=href.substring(href.indexOf("?key=")+5,href.indexOf("&s="));
+		console.log(q);
+		q=decodeURIComponent(q);
+		console.log(q);
 	}
-	q=decodeURIComponent(q);
-	console.log(q);
-	var num=window.location.href.split('&num=')[1];
-	console.log("num");
-	console.log(num);
+	/*console.log(q+href.substring(href.indexOf("&num=")));
+	if(href.indexOf("&num=")>0){
+		num=href.substring(href.indexOf("&num=")+5,href.indexOf("&s"));
+	}*/
+	if(href.indexOf("&s=")>0){
+		s=href.substring(href.indexOf("&s=")+3);
+	}
+	console.log("s:"+s);
+	
 	if(num==undefined){
 		num=1;
 	}
@@ -105,7 +115,6 @@
 		}
 	}
 	function ctype() {
-		//优惠方式清空
 		var $stype = $("input[name=stype]");
 		$stype.attr("checked", false);
 	}
@@ -116,7 +125,7 @@
 	}
 	function search() {
 		if($('#key').val()==''){
-			alert('请输入商品关键字');
+			//alert('请输入商品关键字');
 			$('#key').focus();
 			return false;
 		}
@@ -126,6 +135,7 @@
 		    y.remove()
 		    //console.log('2222:'+y.remove());
 		});
+		//num=1;
 		searchData(num);
 	}
 	function searchData(pageNo){
@@ -163,9 +173,9 @@
 		var ul = $("#content"); //主体元素
 		ul.append('<li>'
 				+ '<div class="news-detail cfx">'
-				+ '	<a href="content.html?id='+obj.numIid+'&num='+(num-1)+'&key='+$('#key').val()+'">'
+				+ '	<a href="javascript:goCont('+obj.numIid+');">'
 				+ '	<span class="news-detail-img"><img src="'+obj.pictUrl+'" width="150" height="150"/></span>'
-				+ '	<h3 style="height:150px;">'+obj.title+'元<br>'
+				+ '	<h3 style="height:150px;">'+obj.title+'<br>'
 				+'  原&nbsp;价：'+obj.reservePrice+'<br><font style="color:red;font-size:16px;"><b>折扣价：'+obj.zkFinalPrice+'元</b></font><br>'
 				+'  30天销量：'+obj.volume+'件 <br>宝贝所在：'+obj.provcity
 				+'  </h3>'
@@ -173,13 +183,17 @@
 				+ '</div>'
 				+ '</li>');
 	}
+	function goCont(id){
+		location.href='content.html?id='+id+'&key='+$('#key').val()+'&s='+s;
+	}
 	//alert(config_path_JsonP);
 </script>
 <script type="text/javascript">
+    $('html, body').animate({ scrollTop: s}, 1000);
     //num = 2;
 	$(document).ready(
 		function() {
-			var range = 50; //距下边界长度/单位px
+			var range = 30; //距下边界长度/单位px
 			var elemt = 500; //插入元素高度/单位px
 			var maxnum = 200; //设置加载最多次数
 			
@@ -187,10 +201,10 @@
 			$(window).scroll(
 				function() {
 					var srollPos = $(window).scrollTop(); //滚动条距顶部距离(页面超出窗口的高度)
-
-					//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+					s=$(document).scrollTop();
+					console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
 					//console.log("页面的文档高度 ："+$(document).height());
-					//console.log('浏览器的高度：'+$(window).height());
+					console.log('浏览器的高度：'+$(window).height());
 
 					totalheight = parseFloat($(window).height())+ parseFloat(srollPos);
 					if (($(document).height() - range) <= totalheight&& num != maxnum) {
