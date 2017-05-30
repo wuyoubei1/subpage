@@ -316,9 +316,16 @@
 	<script src="http://oonojod06.bkt.clouddn.com/jquery.jsonp.js"></script>
 	<script src="../config/config.js"></script>
 	<script>
-		var q = window.location.href;
-		q = q.split('=')[1];
+	    var s=0;
+		var href = window.location.href;
+		console.log("href:"+href);
+		var q="";
+		if(href.indexOf("key=")>0){
+			q = href.substring(href.indexOf("key=")+4,href.indexOf("&s="));
+		}
 		q = decodeURIComponent(q);
+		s=href.substring(href.indexOf("&s=")+3);
+		console.log("距离："+s+"| 关键词："+q);
 		//alert(q);
 		var defaultV = "";
 		if (q != 'undefined' && q != defaultV) {
@@ -409,7 +416,7 @@
 		function appendUl(obj) {
 			var content = $("#content"); //主体元素
 			content.append('<div class="goods-item">'
-				+ '<a href="yhcxCont.html?id='+obj.goodsId+'&key='+$('#key').val()+'"  class="img">'
+				+ '<a href="javascript:goCont('+obj.goodsId+');" class="img">'
 				+ '<span class="coupon-wrapper">'
 				+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
 				+ '<span class="price">'+obj.quanPrice+'元</span>'
@@ -428,8 +435,17 @@
 		}
 		//alert(config_path_JsonP);
 		searchData(1);
+		function goCont(id){
+			location.href='yhcxCont.html?id='+id+'&key='+$('#key').val()+'&s='+s;
+		}
 	</script>
 	<script type="text/javascript">
+	//页面自动滚动到的位置  1000表示1秒内执行
+	var time=100;
+	if(s>2000){
+		time=100*(1+(s/3000));
+	}
+    $('html, body').animate({ scrollTop: s}, time);
 	$(document).ready(
 		function() {
 			var range = 50; //距下边界长度/单位px
@@ -440,7 +456,7 @@
 			$(window).scroll(
 				function() {
 					var srollPos = $(window).scrollTop(); //滚动条距顶部距离(页面超出窗口的高度)
-
+					s=$(document).scrollTop();
 					//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
 					//console.log("页面的文档高度 ："+$(document).height());
 					//console.log('浏览器的高度：'+$(window).height());

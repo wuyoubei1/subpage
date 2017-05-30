@@ -48,7 +48,12 @@
 		<input class="button button-glow button-rounded button-caution button-small" type="submit" onclick="detail()" value="查看详情">
 		<a id="buylink" biz-itemid="" isconvert=1 href="#" to="" onclick="javascript:buylink()"><input class="button button-glow button-rounded button-caution button-small" type="submit"  value="点击购买"></a>
      </div>
-	 <div id="detail" style="text-align: center;"></div> 
+	 <div id="detail" style="text-align: center;padding-top: 10px;"></div> 
+	 <div style="text-align: center;display: none;padding-top: 5px;" id="buyBtn">
+	 	<a id="buylink" biz-itemid="" isconvert=1 href="#" to="" onclick="javascript:buylink()">
+	 	<input class="button button-glow button-rounded button-caution button-small" type="submit"  value="点击购买">
+	 	</a>
+	 </div>
 </div>
 <br>
 <footer class="footer">
@@ -127,6 +132,7 @@ function detail(){
 	        	}
 	        	$('#detail').html(temp);
 	        }
+	        $('#buyBtn').show();
 	    },
 	    success:function(json,textStatus,xOptions){
 	        console.log("jsonp.success:"+json);

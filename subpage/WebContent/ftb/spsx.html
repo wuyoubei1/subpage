@@ -189,7 +189,13 @@
 	//alert(config_path_JsonP);
 </script>
 <script type="text/javascript">
-    $('html, body').animate({ scrollTop: s}, 1000);
+    //页面自动滚动到的位置  1000表示1秒内执行
+    var time=100;
+	if(s>2000){
+		time=100*(1+(s/3000));
+	}
+	console.log(s);
+	$('html, body').animate({ scrollTop: s}, time);
     //num = 2;
 	$(document).ready(
 		function() {

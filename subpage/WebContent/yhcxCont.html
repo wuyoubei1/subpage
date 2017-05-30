@@ -133,7 +133,10 @@ $.jsonp({
         	}
         	
         	$('#buyquan').attr('biz-itemid',json[0].goodsId);
-        	$('#buyquan').attr('to',json[0].qQuanMLink);
+        	$('#buyquan').attr('to',json[0].quanLink);
+        	if(json[0].qQuanMLink==null){
+        		$('#buyquan').attr('to',json[0].quanLink);
+        	}
         }
     },
     success:function(json,textStatus,xOptions){

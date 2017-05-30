@@ -95,12 +95,14 @@
 <script>
 //接收传递的参数
 var href = window.location.href;
+var s=0;
 console.log("href");
 console.log("href:"+href);
 var id=href.substring(href.indexOf("id=")+3,href.indexOf("&key"));
 console.log("id:"+id);
-var key=href.substring(href.indexOf('key=')+4);
-console.log("key:"+key);
+var key=href.substring(href.indexOf('key=')+4,href.indexOf("&s="));
+s=href.substring(href.indexOf("&s=")+3);
+console.log("key:"+key+"|距离"+s);
 //alert(id);
 $.jsonp({
 	url : config_path_JsonP+'/subadmin/f/sub/yhcx/data',
@@ -283,7 +285,7 @@ function searchData(pageNo) {
 function appendUl(obj) {
 	var content = $("#jptj"); //主体元素
 	content.append('<div class="goods-item">'
-		+ '<a href="yhcxCont.html?id='+obj.goodsId+'"  class="img">'
+		+ '<a href="javascript:goCont('+obj.goodsId+'); "  class="img">'
 		+ '<span class="coupon-wrapper">'
 		+ '<span class="coupon" style="color: #EDFF00;">独家券</span>'
 		+ '<span class="price">'+obj.quanPrice+'元</span>'
@@ -302,7 +304,10 @@ function appendUl(obj) {
 }
 /****/
 function wback(){
-	location.href="yhcx.html?key="+key;
+	location.href="yhcx.html?key="+key+"&s="+s;
+}
+function goCont(id){
+	location.href='yhcxCont.html?id='+id+'&key='+$('#key').val()+'&s='+s;
 }
 </script>
 
