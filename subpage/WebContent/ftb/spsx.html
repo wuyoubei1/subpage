@@ -130,15 +130,17 @@
 			return false;
 		}
 		var ul = $("#content"); //主体元素
+		$("#content").html("");
 		ul.each(function(){
 		    var y = $(this).children();
 		    y.remove()
 		    //console.log('2222:'+y.remove());
 		});
-		//num=1;
+		num=1;
 		searchData(num);
 	}
 	function searchData(pageNo){
+		console.log("pageNo:"+pageNo);
 		num=pageNo;
 		var obj=null;
 		//alert("优惠方式："+t);
@@ -146,14 +148,14 @@
 			url:config_path_JsonP+'/subadmin/f/sub/pTb/spsx',
 			data:{'pageNo':pageNo,'q':$('#key').val(),
             	'fields':'title,pict_url,reserve_price,zk_final_price,provcity,item_url,volume,num_iid',
-            	'sort':'total_sales_des'},
+            	'sort':'total_sales_des','platform':'2'},
             callbackParameter:"callback",
             jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
             //jsonpCallback: "receive",//自定
             timeout:3000,
             dataFilter:function(json){
-            	//console.log("jsonp.filter:"+json.results.length);
-                for(var i=1;i<json.results.length;i++){
+            	console.log(json);
+                for(var i=0;i<json.results.length;i++){
                 	//obj=json.get(i);
                 	//console.log(json.results[i]);
                 	appendUl(json.results[i]);//拼接ul
@@ -208,9 +210,9 @@
 				function() {
 					var srollPos = $(window).scrollTop(); //滚动条距顶部距离(页面超出窗口的高度)
 					s=$(document).scrollTop();
-					console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+					//console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
 					//console.log("页面的文档高度 ："+$(document).height());
-					console.log('浏览器的高度：'+$(window).height());
+					//console.log('浏览器的高度：'+$(window).height());
 
 					totalheight = parseFloat($(window).height())+ parseFloat(srollPos);
 					if (($(document).height() - range) <= totalheight&& num != maxnum) {
